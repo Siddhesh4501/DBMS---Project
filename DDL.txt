@@ -1,0 +1,96 @@
+create database internship;
+use internship;
+
+create table Student(
+    mis varchar(10),
+    first_name varchar(20),
+    last_name varchar(20),
+    email_id varchar(20),
+    PRIMARY KEY (MIS)
+);
+
+create table Company(
+     company_id varchar(10),
+     company_name varchar(20),
+     role varchar(20),
+     location varchar(20),
+     stipend int,
+     no_of_rounds int,
+     no_of_people_selected int,
+     duratino_of_aptitude int,
+     PRIMARY KEY (company_id)
+);
+
+create table Interview_Experience(
+    mis varchar(10),
+    company_id varchar(10),
+    interview_rating int,
+    overall_experience varchar(100),
+    result varchar(10),
+    PRIMARY KEY (mis,company_id),
+    FOREIGN KEY (mis) references Student(mis),
+    FOREIGN KEY (company_id) references Company(company_id)        
+);
+
+create table DSA_Questions(
+    mis varchar(10),
+    question_description varchar(100),
+    company_id varchar(10),
+    PRIMARY KEY (MIS,question_description),
+    FOREIGN KEY (mis,company_id) references Interview_Experience(mis,company_id)
+);
+
+
+create table Core_Questions(
+    mis varchar(10),
+    question_description varchar(100),
+    company_id varchar(10),
+    PRIMARY KEY (MIS,question_description),
+    FOREIGN KEY (mis,company_id) references Interview_Experience(mis,company_id)
+);
+
+
+create table HR_Questions(
+    mis varchar(10),
+    question_description varchar(100),
+    company_id varchar(10),
+    PRIMARY KEY (MIS,question_description),
+    FOREIGN KEY (mis,company_id) references Interview_Experience(mis,company_id)
+);
+
+create table Doubt_Forum(
+    doubt_id varchar(10),
+    mis varchar(10),
+    company_id varchar(10),
+    doubt varchar(100),
+    PRIMARY KEY(doubt_id),
+    FOREIGN KEY (mis) references Student(mis),
+    FOREIGN KEY (company_id) references Company(company_id)  
+);
+
+create table Answers(
+    doubt_id varchar(10),
+    mis varchar(10),
+    answer varchar(100),
+    PRIMARY KEY(doubt_id,mis),
+    FOREIGN KEY (mis) references Interview_Experience(mis) 
+);
+
+insert into Student values("112003112", "Siddhesh", "Pawar", "sidsir@gmail.com");
+insert into Student values("112003116", "Shyam", "Randar", "shyam@gmail.com");
+insert into Student values("112003114", "Prerna", "Tulsiani", "prerna@gmail.com");
+insert into Company values("1","BNY Mellon","SDE","Pune",75000,2,13,120);
+insert into Company values("2","Deutsche bank","SDE","Pune",75000,2,11,110);
+insert into interview_experience values("112003112","1",4,"Good","Selected");
+insert into interview_experience values("112003116","1",3,"Ok","Selected");
+insert into interview_experience values("112003114","2",5,"Very Good","Selected");
+insert into DSA_Questions values("112003112","Quick sort","1");
+insert into DSA_Questions values("112003116","Sorting Algo","1");
+insert into HR_Questions values("112003116","Tell me about a project where you worked in a Team","1");
+insert into Core_Questions values("112003114","Explain 3NF.","2");
+
+
+
+
+
+

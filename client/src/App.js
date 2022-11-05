@@ -16,6 +16,9 @@ const Projects = lazy(() => import('./pages/Projects'));
 const AddCompany = lazy(() => import('./pages/AddCompany'));
 const AddExperience = lazy(() => import('./pages/AddExperience'));
 const Stats = lazy(() => import('./pages/Stats'));
+const AddQue= lazy(() => import('./pages/AddQue'));
+const AddAns= lazy(() => import('./pages/AddAns'));
+const SeeAns= lazy(() => import('./pages/SeeAns'));
 
 const App = () => (
   <BrowserRouter basename={PUBLIC_URL}>
@@ -28,6 +31,9 @@ const App = () => (
         <Route path="/contact" component={Contact} />
         <Route path="/add-company" component={AddCompany} />
         <Route path="/add-experience" component={AddExperience} />
+        <Route path="/addque" component={AddQue} />
+        <Route path="/addans" component={AddAns} />
+        <Route path="/seeans" component={SeeAns} />
         <Route component={NotFound} status={404} />
       </Switch>
     </Suspense>

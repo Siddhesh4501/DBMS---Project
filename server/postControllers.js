@@ -1,4 +1,4 @@
-const { PostStudent, PostCompany, PostInterviewExperience } = require("./Post")
+const { PostStudent, PostCompany, PostInterviewExperience, PostQuestions } = require("./Post")
 
 // for adding student records
 exports.getAllPostsStudent = async (req, res, next) => {
@@ -50,5 +50,21 @@ exports.createNewPostInterviewExperience = async (req, res, next) => {
 
 exports.getPostByIdInterviewExperience = async (req, res, next) => {
     res.send("Get post by id")
+}
 
+// for adding questions records
+exports.getAllPostsQuestions = async (req, res, next) => {
+    res.send("Get all the posts")
+}
+
+exports.createNewPostQuestions = async (req, res, next) => {
+    let { question_tag, mis, question_description, company_id } = req.body
+    let post = new PostQuestions(question_tag, mis, question_description, company_id)
+    post = await post.save()
+    console.log(post)
+    res.send("Create New Post Route")
+}
+
+exports.getPostByIdQuestions = async (req, res, next) => {
+    res.send("Get post by id")
 }

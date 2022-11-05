@@ -10,7 +10,7 @@ class PostStudent {
     async save() {
         let sql = `
         INSERT INTO student VALUES(
-            ${this.mis},    
+            "${this.mis}",    
             "${this.first_name}",    
             "${this.last_name}",    
             "${this.email_id}"
@@ -77,7 +77,7 @@ class PostInterviewExperience {
     async save() {
         let sql = `
         INSERT INTO interview_experience VALUES(
-            ${this.mis},    
+            "${this.mis}",    
             "${this.company_id}",    
             "${this.interview_rating}",    
             "${this.overall_experience}",
@@ -95,6 +95,70 @@ class PostInterviewExperience {
     }
 
 }
+class PostQuestions {
 
-// module.exports = PostStudent;
-module.exports = { PostStudent, PostCompany, PostInterviewExperience };
+    constructor(question_tag, mis, question_description, company_id) {
+        this.question_tag = question_tag;
+        this.mis = mis;
+        this.question_description = question_description;
+        this.company_id = company_id;
+    }
+
+    async save() {
+        let sql = ""
+        if (this.question_tag == "dsa") {
+            sql = `
+            INSERT INTO dsa_questions VALUES(
+                "${this.mis}",    
+                "${this.question_description}",    
+                "${this.company_id}"
+            );
+            `
+        }
+        else if (this.question_tag == "core") {
+            sql = `
+            INSERT INTO core_questions VALUES(
+                "${this.mis}",    
+                "${this.question_description}",    
+                "${this.company_id}"
+            );
+            `
+        }
+        else {
+            sql = `
+            INSERT INTO hr_questions VALUES(
+                "${this.mis}",    
+                "${this.question_description}",    
+                "${this.company_id}"
+            );
+            `
+        }
+
+
+        const [newPost, _] = await db.execute(sql)
+        return newPost
+    }
+
+    static findAll() {
+        let sql = ""
+        if (this.question_tag == "dsa") {
+            sql = `
+            SELECT * FROM dsa_questions;
+            `
+        }
+        else if (this.question_tag == "core") {
+            sql = `
+            SELECT * FROM core_questions;
+            `
+        }
+        else {
+            sql = `
+            SELECT * FROM hr_questions;
+            `
+        }
+        return devicePixelRatio.execute(sql)
+    }
+
+}
+
+module.exports = { PostStudent, PostCompany, PostInterviewExperience, PostQuestions };

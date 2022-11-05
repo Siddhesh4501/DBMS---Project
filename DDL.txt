@@ -17,7 +17,7 @@ create table Company(
      stipend int,
      no_of_rounds int,
      no_of_people_selected int,
-     duratino_of_aptitude int,
+     duration_of_aptitude int,
      PRIMARY KEY (company_id)
 );
 

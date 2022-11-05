@@ -7,15 +7,6 @@ app.use(cors({
   origin: 'http://localhost:3000'
 }));
 
-// const mysql = require("mysql2");
-// const db = mysql.createPool({
-//   port: 3306,
-//   host: "localhost",
-//   user: "root",
-//   password: "coep@123",
-//   database: "internship",
-// });
-
 // Middleware
 app.use(express.json()); // parse json bodies in the request object
 

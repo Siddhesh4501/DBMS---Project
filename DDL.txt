@@ -89,8 +89,11 @@ insert into DSA_Questions values("112003116","Sorting Algo","1");
 insert into HR_Questions values("112003116","Tell me about a project where you worked in a Team","1");
 insert into Core_Questions values("112003114","Explain 3NF.","2");
 
+create table Student_Password(
+	mis varchar(10),
+    email varchar(30),
+    password varchar(20),
+    FOREIGN KEY (mis) references Student(mis)
+);
 
-
-
-
-
+insert into Student_Password values("112003114","prernat20.comp@coep.ac.in","1234");

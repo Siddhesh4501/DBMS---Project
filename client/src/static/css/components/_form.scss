@@ -44,7 +44,6 @@
 	input[type="password"],
 	input[type="email"],
 	input[type="tel"],
-	input[type="number"],
 	select,
 	textarea {
 		@include vendor('appearance', 'none');
@@ -94,7 +93,6 @@
 	}
 
 	input[type="text"],
-	input[type="number"],
 	input[type="password"],
 	input[type="email"],
 	select {

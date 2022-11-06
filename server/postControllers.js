@@ -68,3 +68,5 @@ exports.createNewPostQuestions = async (req, res, next) => {
 exports.getPostByIdQuestions = async (req, res, next) => {
     res.send("Get post by id")
 }
+
+

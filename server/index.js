@@ -53,7 +53,7 @@ app.use("/posts", require("./postRoutes"));
 //                student.mis in (${mis_str});`
 
 // db.execute(sql_dsa, function (err, result) {
-//   if (err) throw err
+//   // if (err) throw err
 //   console.log(result)
 //   result.forEach(res => {
 //     console.log(res.title)

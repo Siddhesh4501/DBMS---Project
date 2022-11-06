@@ -1,4 +1,5 @@
-const { PostStudent, PostCompany, PostInterviewExperience, PostQuestions } = require("./Post")
+const { execute } = require("./db")
+const { PostStudent, PostCompany, PostInterviewExperience, PostQuestions, DoubtQuestions, Answers} = require("./Post")
 
 // for adding student records
 exports.getAllPostsStudent = async (req, res, next) => {
@@ -70,3 +71,38 @@ exports.getPostByIdQuestions = async (req, res, next) => {
 }
 
 
+exports.getAllDoubts=async(req,res,next)=>{
+    let doubt= await DoubtQuestions.findAll();
+    console.log(doubt);
+    res.send(doubt) ;
+
+}
+
+exports.createNewDoubt=async(req,res,next)=>{
+    let {mis,company_id,doubt}=req.body;
+    let post=new DoubtQuestions(mis,company_id,doubt);
+    post= await post.save();
+    console.log(post);
+    res.send(post)
+}
+
+exports.getAllAns= async(req,res,next)=>{
+    let id=req.params.id;
+    let ans=await Answers.findAll(id);
+    res.send(ans);
+}
+
+exports.createNewAns = async(req,res,next)=>{
+    let id=req.params.id;
+    try{
+        let {doubt_id,mis,answer}=req.body;
+        let post=new Answers(doubt_id,mis,answer);
+        post= await post.save();
+        console.log(post);
+        res.send(post)
+    }
+    catch{
+        res.send("Error in post")
+    }
+    // res.send("This is post requst");
+}

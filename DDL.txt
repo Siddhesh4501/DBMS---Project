@@ -59,7 +59,7 @@ create table HR_Questions(
 );
 
 create table Doubt_Forum(
-    doubt_id varchar(10),
+    doubt_id int NOT NULL AUTO_INCREMENT,
     mis varchar(10),
     company_id varchar(10),
     doubt varchar(100),
@@ -76,6 +76,7 @@ create table Answers(
     FOREIGN KEY (mis) references Interview_Experience(mis) 
 );
 
+alter table doubt_forum  AUTO_INCREMENT=100;
 insert into Student values("112003112", "Siddhesh", "Pawar", "sidsir@gmail.com");
 insert into Student values("112003116", "Shyam", "Randar", "shyam@gmail.com");
 insert into Student values("112003114", "Prerna", "Tulsiani", "prerna@gmail.com");
@@ -97,3 +98,8 @@ create table Student_Password(
 );
 
 insert into Student_Password values("112003114","prernat20.comp@coep.ac.in","1234");
+
+insert into doubt_forum(mis,company_id,doubt) values(112003112,1,"what are questions");
+insert into doubt_forum(mis,company_id,doubt) values(112003114,2,"how about sql");
+
+insert into answers values(100,112003112,"The questions was great");

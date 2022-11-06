@@ -161,4 +161,63 @@ class PostQuestions {
 
 }
 
-module.exports = { PostStudent, PostCompany, PostInterviewExperience, PostQuestions };
+
+class DoubtQuestions {
+
+    constructor(mis, company_id, doubt) {
+        this.mis = mis;
+        this.company_id = company_id;
+        this.doubt=doubt
+    }
+
+    async save() {
+            let sql = `
+            INSERT INTO doubt_forum(mis,company_id,doubt) VALUES(
+                "${this.mis}",    
+                "${this.company_id}",    
+                "${this.doubt}"
+            );
+            `
+        const [newPost, _] = await db.execute(sql);
+        return newPost;
+    }
+
+    static async findAll() {
+        let sql = "SELECT * FROM doubt_forum"
+         const [newPost, _] =await db.execute(sql);
+         return newPost;
+    }
+
+}
+
+class Answers {
+
+    constructor(doubt_id, mis, ans) {
+        this.doubt_id = doubt_id;
+        this.mis = mis;
+        this.ans=ans;
+    }
+
+    async save() {
+            let sql = `
+            INSERT INTO answers VALUES(
+                "${this.doubt_id}",    
+                "${this.mis}",    
+                "${this.ans}"
+            );
+            `
+        const [newPost, _] = await db.execute(sql);
+        return newPost;
+    }
+
+    static async findAll(id) {
+        let sql = `SELECT * FROM answers 
+                   where doubt_id="${id}";`
+         const [newPost, _] =await db.execute(sql);
+         return newPost;
+    }
+
+}
+
+
+module.exports = { PostStudent, PostCompany, PostInterviewExperience, PostQuestions,DoubtQuestions,Answers };

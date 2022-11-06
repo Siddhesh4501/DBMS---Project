@@ -10,20 +10,20 @@ const AddQue = () => (
     <div id="form-main">
       <h4>Enter Your Que in below Form</h4>
       <div id="form-div">
-        <form class="form" id="form1">
+        <form className="form" id="form1">
 
-          <p class="name">
-            <input name="name" type="text" class="validate[required,custom[onlyLetter],length[0,100]] feedback-input" placeholder="Company Name" id="name" />
+          <p className="name">
+            <input name="name" type="text" className="validate[required,custom[onlyLetter],length[0,100]] feedback-input" placeholder="Company Name" id="name" />
           </p>
 
-          <p class="text">
-            <textarea name="text" class="validate[required,length[6,300]] feedback-input" id="comment" placeholder="Question"></textarea>
+          <p className="text">
+            <textarea name="text" className="validate[required,length[6,300]] feedback-input" id="comment" placeholder="Question"></textarea>
           </p>
 
 
-          <div class="submit">
+          <div className="submit">
             <input type="submit" value="SEND" id="button-blue" />
-            <div class="ease"></div>
+            <div className="ease"></div>
           </div>
         </form>
       </div>

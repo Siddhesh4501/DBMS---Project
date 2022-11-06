@@ -35,7 +35,7 @@ const App = () => (
         <Route path="/add-experience" component={AddExperience} />
         <Route path="/addque" component={AddQue} />
         <Route path="/addans" component={AddAns} />
-        <Route path="/seeans" component={SeeAns} />
+        <Route path="/seeans/:id" component={SeeAns} />
         <Route component={NotFound} status={404} />
       </Switch>
     </Suspense>

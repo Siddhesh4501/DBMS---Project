@@ -183,7 +183,8 @@ class DoubtQuestions {
     }
 
     static async findAll() {
-        let sql = "SELECT * FROM doubt_forum"
+        let sql = `SELECT Doubt_Forum.doubt_id,Doubt_Forum.mis,Doubt_Forum.company_id,Doubt_Forum.doubt,student.first_name,student.last_name,company.company_name FROM doubt_forum
+                   JOIN student on Doubt_Forum.mis=student.mis JOIN company on Doubt_Forum.company_id=company.company_id`
          const [newPost, _] =await db.execute(sql);
          return newPost;
     }
@@ -211,8 +212,9 @@ class Answers {
     }
 
     static async findAll(id) {
-        let sql = `SELECT * FROM answers 
-                   where doubt_id="${id}";`
+        let sql = `SELECT answers.doubt_id,Doubt_Forum.company_id,answers.mis,answers.answer,student.first_name,student.last_name,company.company_name FROM answers
+                   JOIN student on answers.mis=student.mis JOIN Doubt_Forum on Doubt_Forum.doubt_id= answers.doubt_id JOIN company on company.company_id=Doubt_Forum.company_id
+                   where answers.doubt_id="${id}";`
          const [newPost, _] =await db.execute(sql);
          return newPost;
     }

@@ -1,24 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-
 import Main from '../layouts/Main';
-
-const sections = [
-  'Education',
-  'Experience',
-  'Skills',
-  'Courses',
-  'References',
-];
 
 const AddCompany = () => (
   <Main
     title="AddCompany"
     description="Michael D'Angelo's Resume. Arthena, Matroid, YC, Skeptical Investments, Stanford ICME, Planet Labs, and Facebook."
   >
-
     {/* form for student */}
-
     {/* <h1>Student's Data</h1>
     <form action="">
       <div className="form-group">
@@ -43,14 +31,12 @@ const AddCompany = () => (
       <button className="btn btn-primary">Submit</button>
     </form> */}
 
-
-    {/* form for company */}
-
-    <h1>Company's Data</h1>
+    <h1>Company Data</h1>
     <form action="">
       <div className="form-group">
         <label htmlFor="company_name">Company name</label>
         <input id="company_name" type="text" className="form-control" />
+        {/* <input id="company_name" type="text" className="textarea" /> */}
       </div>
       <br />
       <div className="form-group">
@@ -68,7 +54,6 @@ const AddCompany = () => (
         <input id="stipend" type="number" className="form-control" />
       </div>
       <br />
-      {/* company_id, company_name, role, location, stipend, no_of_rounds, no_of_people_selected, duration_of_aptitude */}
       <div className="form-group">
         <label htmlFor="no_of_rounds">Number of Rounds</label>
         <input id="no_of_rounds" type="number" className="form-control" />
@@ -87,9 +72,9 @@ const AddCompany = () => (
       <div>
         <br />
       </div>
-      <button className="button">Submit</button>
+      <button className="button" type="submit">Submit</button>
     </form>
-  </Main >
+  </Main>
 );
 
 export default AddCompany;

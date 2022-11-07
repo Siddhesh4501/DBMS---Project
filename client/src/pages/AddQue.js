@@ -5,7 +5,7 @@ import Main from '../layouts/Main';
 // import "./AddQue.css"
 const AddQue = () => {
   const [inputs, setInputs] = useState({});
-  localStorage.setItem("mis",112003112);
+  localStorage.setItem("mis",112103112);
   
   const handleChange = (event) => {
     const name = event.target.name;

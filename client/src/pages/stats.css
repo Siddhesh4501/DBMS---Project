@@ -72,6 +72,7 @@
   flex-direction: row;
   z-index: 2;
   position: relative;
+  justify-content: left;
 }
 .firstinfo img {
   border-radius: 50%;
@@ -102,9 +103,16 @@
 a {
   border-bottom: none;
 }
-
+.profileinfo h2{
+  font-size: 1.5em;
+  margin: 0;
+}
+.profileinfo p{
+  font-size: 1.2em;
+  margin: 0;
+}
 #headbutton{
-  color: aqua;
+  background-color: #009688 !important;
 }
 @keyframes animatop {
   0% {

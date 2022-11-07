@@ -28,7 +28,8 @@ const AddQue = () => {
       console.log(data);
       let parsedata=await data.json();
       console.log(parsedata)
-    alert(inputs);
+    // alert(inputs);
+      alert(parsedata["status"]);
   }
 
 

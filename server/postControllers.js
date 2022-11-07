@@ -73,45 +73,68 @@ exports.getPostByIdQuestions = async (req, res, next) => {
 
 
 exports.getAllDoubts=async(req,res,next)=>{
-    let doubt= await DoubtQuestions.findAll();
-    console.log(doubt);
-    res.send(doubt) ;
+    try{
+        let doubt= await DoubtQuestions.findAll();
+        console.log(doubt);
+        res.send(doubt) ;
+    }
+    catch{
+        res.send({"doubt_id": "0",
+        "mis": "0",
+        "company_id": "0",
+        "doubt": "0",
+        "first_name": "0",
+        "last_name": "0",
+        "company_name": "0"});
+    }
 
 }
 
 exports.createNewDoubt=async(req,res,next)=>{
-    let {mis,company_name,doubt}=req.body;
-    let query=`select company_id from company where company_name="${company_name}";`
-    const newPost = await db.execute(query);
-    // console.log(newPost);
-    const company_id=newPost[0][0]["company_id"];
-    // console.log(company_id);
-    let post=new DoubtQuestions(mis,company_id,doubt);
-    post= await post.save();
-    // console.log(post);
-    res.send(post);
-    // res.send({id});
-    // res.send({})
-    // res.send(post);
+    try{
+        let {mis,company_name,doubt}=req.body;
+        let query=`select company_id from company where company_name="${company_name}";`
+        const newPost = await db.execute(query);
+        const company_id=newPost[0][0]["company_id"];
+        let post=new DoubtQuestions(mis,company_id,doubt);
+        post= await post.save();
+        res.send({status:"success"});
+        
+    }
+    catch{
+        res.send({status:"Error"});
+    }
 }
 
 exports.getAllAns= async(req,res,next)=>{
-    let id=req.params.id;
-    let ans=await Answers.findAll(id);
-    res.send(ans);
+    try{
+        let id=req.params.id;
+        let ans=await Answers.findAll(id);
+        res.send(ans);
+    }
+    catch{
+        res.send({
+            "doubt_id": "0",
+            "company_id": "0",
+            "mis": "0",
+            "answer": "0",
+            "first_name": "0",
+            "last_name": "0",
+            "company_name": "0"
+          });
+        
+    }
 }
 
 exports.createNewAns = async(req,res,next)=>{
-    let id=req.params.id;
+    let {doubt_id,mis,answer}=req.body;
     try{
-        let {doubt_id,mis,answer}=req.body;
         let post=new Answers(doubt_id,mis,answer);
         post= await post.save();
-        console.log(post);
-        res.send(post)
+        // console.log(post);
+        res.send({status:"success"});
     }
     catch{
-        res.send("Error in post")
+        res.send({status:"Error"});
     }
-    // res.send("This is post requst");
 }

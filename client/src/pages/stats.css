@@ -99,7 +99,13 @@
   height: 40px;
   margin-left: 20px;
 }
+a {
+  border-bottom: none;
+}
 
+#headbutton{
+  color: aqua;
+}
 @keyframes animatop {
   0% {
     opacity: 0;

@@ -29,12 +29,12 @@ const App = () => (
         <Route path="/login" component={login} />
         <Route path="/about" component={About} />
         <Route path="/projects" component={Projects} />
-        <Route path="/stats" component={Stats} />
+        <Route path="/seedoubt" component={Stats} />
         <Route path="/contact" component={Contact} />
         <Route path="/add-company" component={AddCompany} />
         <Route path="/add-experience" component={AddExperience} />
         <Route path="/addque" component={AddQue} />
-        <Route path="/addans" component={AddAns} />
+        <Route path="/addans/:id" component={AddAns} />
         <Route path="/seeans/:id" component={SeeAns} />
         <Route component={NotFound} status={404} />
       </Switch>

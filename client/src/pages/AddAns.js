@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState,useEffect } from 'react';
 import Main from '../layouts/Main';
 import "./AddAns.css"
 
@@ -16,7 +17,39 @@ import "./AddAns.css"
 //   alert(inputs);
 // }
 
-const AddAns = () => (
+const AddAns = (props) => {
+  let id= props.match.params.id;
+  const [inputs, setInputs] = useState({});
+  localStorage.setItem("mis",112003112);
+  
+  const handleChange = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+    setInputs(values => ({...values, [name]: value}))
+    setInputs(values=>({...values,["mis"]:localStorage.getItem("mis")}));
+    setInputs(values=>({...values,["doubt_id"]:id}));
+  }
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    console.log(inputs);
+    // console.log(inputs);
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(inputs)
+  };
+      let url=`http://localhost:3001/posts/ans/${id}`;
+      let data=await fetch(url,requestOptions);
+      console.log(data);
+      let parsedata=await data.json();
+      console.log(parsedata);
+      alert(parsedata["status"]);
+        
+  }
+
+
+  return(
   <Main
     title="Stats"
     description="Some statistics about Michael D'Angelo and mldangelo.com"
@@ -24,14 +57,12 @@ const AddAns = () => (
     <div id="form-main">
       <h4>Enter Your Answer in below Form</h4>
       <div id="form-div">
-        <form className="form" id="form1">
+        <form className="form" id="form1"  onSubmit={handleSubmit}>
 
-          <p className="name">
-            <input name="name" type="text" className="validate[required,custom[onlyLetter],length[0,100]] feedback-input" placeholder="Question to answer" id="name" />
-          </p>
 
           <p className="text">
-            <textarea name="text" className="validate[required,length[6,300]] feedback-input" id="comment" placeholder="Enter your answer here..."></textarea>
+            <textarea name="answer" className="validate[required,length[6,300]] feedback-input" id="comment" placeholder="Enter your answer here..." value={inputs.answer || ""} 
+          onChange={handleChange}></textarea>
           </p>
 
 
@@ -43,7 +74,7 @@ const AddAns = () => (
       </div>
     </div>
 
-  </Main>
-);
+  </Main>)
+};
 
 export default AddAns;

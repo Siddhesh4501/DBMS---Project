@@ -1,4 +1,5 @@
-const { execute } = require("./db")
+const { query } = require("./db")
+const db= require("./db")
 const { PostStudent, PostCompany, PostInterviewExperience, PostQuestions, DoubtQuestions, Answers} = require("./Post")
 
 // for adding student records
@@ -79,11 +80,19 @@ exports.getAllDoubts=async(req,res,next)=>{
 }
 
 exports.createNewDoubt=async(req,res,next)=>{
-    let {mis,company_id,doubt}=req.body;
+    let {mis,company_name,doubt}=req.body;
+    let query=`select company_id from company where company_name="${company_name}";`
+    const newPost = await db.execute(query);
+    // console.log(newPost);
+    const company_id=newPost[0][0]["company_id"];
+    // console.log(company_id);
     let post=new DoubtQuestions(mis,company_id,doubt);
     post= await post.save();
-    console.log(post);
-    res.send(post)
+    // console.log(post);
+    res.send(post);
+    // res.send({id});
+    // res.send({})
+    // res.send(post);
 }
 
 exports.getAllAns= async(req,res,next)=>{

@@ -75,7 +75,7 @@ exports.getPostByIdQuestions = async (req, res, next) => {
 exports.getAllDoubts=async(req,res,next)=>{
     try{
         let doubt= await DoubtQuestions.findAll();
-        console.log(doubt);
+        // console.log(doubt);
         res.send(doubt) ;
     }
     catch{
@@ -93,6 +93,9 @@ exports.getAllDoubts=async(req,res,next)=>{
 exports.createNewDoubt=async(req,res,next)=>{
     try{
         let {mis,company_name,doubt}=req.body;
+        if(mis.substr(0,4)!="1121"){
+            return res.send({status:"MIS invalid"});
+        }
         let query=`select company_id from company where company_name="${company_name}";`
         const newPost = await db.execute(query);
         const company_id=newPost[0][0]["company_id"];
@@ -127,11 +130,19 @@ exports.getAllAns= async(req,res,next)=>{
 }
 
 exports.createNewAns = async(req,res,next)=>{
-    let {doubt_id,mis,answer}=req.body;
+
     try{
+        let {doubt_id,mis,answer}=req.body;
+        if(mis.substr(0,4)!="1120"){
+            return res.send({status:"MIS invalid"});
+        }
+        let query=`select company_id from doubt_forum where doubt_id="${doubt_id}" except select company_id from Interview_Experience where mis="${mis}"`;
+        const [newPost, _] = await db.execute(query);
+        if(newPost.length!==0){
+            return res.send({status:"MIS invalid"});
+        }
         let post=new Answers(doubt_id,mis,answer);
         post= await post.save();
-        // console.log(post);
         res.send({status:"success"});
     }
     catch{

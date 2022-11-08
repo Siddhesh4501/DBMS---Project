@@ -6,6 +6,9 @@ exports.getAllStudentPasswords = async (req, res, next) => {
     console.log(ans)
     res.send(ans);
 }
+const { query } = require("./db")
+const db= require("./db")
+const { PostStudent, PostCompany, PostInterviewExperience, PostQuestions, DoubtQuestions, Answers} = require("./Post")
 
 // for adding student records
 exports.getAllPostsStudent = async (req, res, next) => {
@@ -78,37 +81,79 @@ exports.getPostByIdQuestions = async (req, res, next) => {
 
 
 exports.getAllDoubts=async(req,res,next)=>{
-    let doubt= await DoubtQuestions.findAll();
-    console.log(doubt);
-    res.send(doubt) ;
+    try{
+        let doubt= await DoubtQuestions.findAll();
+        // console.log(doubt);
+        res.send(doubt) ;
+    }
+    catch{
+        res.send({"doubt_id": "0",
+        "mis": "0",
+        "company_id": "0",
+        "doubt": "0",
+        "first_name": "0",
+        "last_name": "0",
+        "company_name": "0"});
+    }
 
 }
 
 exports.createNewDoubt=async(req,res,next)=>{
-    let {mis,company_id,doubt}=req.body;
-    let post=new DoubtQuestions(mis,company_id,doubt);
-    post= await post.save();
-    console.log(post);
-    res.send(post)
+    try{
+        let {mis,company_name,doubt}=req.body;
+        if(mis.substr(0,4)!="1121"){
+            return res.send({status:"MIS invalid"});
+        }
+        let query=`select company_id from company where company_name="${company_name}";`
+        const newPost = await db.execute(query);
+        const company_id=newPost[0][0]["company_id"];
+        let post=new DoubtQuestions(mis,company_id,doubt);
+        post= await post.save();
+        res.send({status:"success"});
+        
+    }
+    catch{
+        res.send({status:"Error"});
+    }
 }
 
 exports.getAllAns= async(req,res,next)=>{
-    let id=req.params.id;
-    let ans=await Answers.findAll(id);
-    res.send(ans);
+    try{
+        let id=req.params.id;
+        let ans=await Answers.findAll(id);
+        res.send(ans);
+    }
+    catch{
+        res.send({
+            "doubt_id": "0",
+            "company_id": "0",
+            "mis": "0",
+            "answer": "0",
+            "first_name": "0",
+            "last_name": "0",
+            "company_name": "0"
+          });
+        
+    }
 }
 
 exports.createNewAns = async(req,res,next)=>{
-    let id=req.params.id;
+
     try{
         let {doubt_id,mis,answer}=req.body;
+        if(mis.substr(0,4)!="1120"){
+            return res.send({status:"MIS invalid"});
+        }
+        let query=`select company_id from doubt_forum where doubt_id="${doubt_id}" except select company_id from Interview_Experience where mis="${mis}"`;
+        const [newPost, _] = await db.execute(query);
+        if(newPost.length!==0){
+            return res.send({status:"MIS invalid"});
+        }
         let post=new Answers(doubt_id,mis,answer);
         post= await post.save();
-        console.log(post);
-        res.send(post)
+        res.send({status:"success"});
     }
     catch{
-        res.send("Error in post")
+        res.send({status:"Error"});
     }
-    // res.send("This is post requst");
 }

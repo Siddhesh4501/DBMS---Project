@@ -42,9 +42,9 @@ return(
                             <div className="card">
                               <div className="firstinfo">
                                 <div className="profileinfo">
-                                  <h1>{ele.first_name+" " + ele.last_name}</h1>
+                                  <h2>{ele.first_name+" " + ele.last_name}</h2>
                                   <h3>{ele.company_name}</h3>
-                                  <p className="bio"> {ele.answer}</p>
+                                  <p className="bio"> Ans. {ele.answer}</p>
                                 </div>
                               </div>
                             </div>

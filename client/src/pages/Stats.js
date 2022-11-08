@@ -36,10 +36,6 @@ const getdata=async()=>{
     console.log(doubts);
   }, [doubts]);
 
-const showallans=(doubt_id)=>{
-  window.open(`/seeans/${doubt_id}`)
-
-}
 
 
 return(
@@ -47,18 +43,19 @@ return(
     title="Stats"
     description="Some statistics about Michael D'Angelo and mldangelo.com"
   >
-
-
+       <button type="button" id="headbutton" className="btn btn-success btn-sm"><Link to={`/addque`}>Add Your Doubts</Link></button>
+    
                            {doubts.map((ele)=>{
                             return  <div className="content">
                             <div className="card">
                               <div className="firstinfo">
                                 <div className="profileinfo">
-                                  <h1>{ele.first_name+" " + ele.last_name}</h1>
+                                  <h2>{ele.first_name+" " + ele.last_name}</h2>
                                   <h3>{ele.company_name}</h3>
-                                  <p className="bio"> {ele.doubt}</p>
-                                  <button onClick={()=>showallans(ele.doubt_id)} type="button" className="btn btn-success btn-sm">See all ans</button>
-                                  <button type="button" className="ml-5 btn btn-primary">Answer Que</button>
+                                  <p className="bio"> Que. {ele.doubt}</p>
+                                  <Link to={`/seeans/${ele.doubt_id}`}><button type="button" className="btn btn-success btn-sm">See all ans</button></Link>
+                                  
+                                  <Link to={`/addans/${ele.doubt_id}`}><button  type="button" className="ml-5 btn btn-primary">Answer Que</button></Link>
                                 </div>
                               </div>
                             </div>

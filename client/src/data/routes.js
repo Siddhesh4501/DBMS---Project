@@ -21,8 +21,8 @@ const routes = [
     path: '/projects',
   },
   {
-    label: 'Stats',
-    path: '/stats',
+    label: 'Doubts',
+    path: '/seedoubt',
   },
   {
     label: 'Contact',

@@ -8,4 +8,5 @@ router.route("/interview-experience").get(postControllers.getAllPostsInterviewEx
 router.route("/questions").get(postControllers.getAllPostsQuestions).post(postControllers.createNewPostQuestions)
 router.route("/doubt").get(postControllers.getAllDoubts).post(postControllers.createNewDoubt)
 router.route("/ans/:id").get(postControllers.getAllAns).post(postControllers.createNewAns)
+router.route("/studentlogin").get(postControllers.getAllStudentPasswords)
 module.exports = router

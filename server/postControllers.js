@@ -1,5 +1,11 @@
 const { execute } = require("./db")
-const { PostStudent, PostCompany, PostInterviewExperience, PostQuestions, DoubtQuestions, Answers} = require("./Post")
+const { PostStudent, PostCompany, PostInterviewExperience, PostQuestions, DoubtQuestions, Answers, StudentLogin} = require("./Post")
+
+exports.getAllStudentPasswords = async (req, res, next) => {
+    let ans=await StudentLogin.findAll();
+    console.log(ans)
+    res.send(ans);
+}
 
 // for adding student records
 exports.getAllPostsStudent = async (req, res, next) => {

@@ -21,6 +21,7 @@ app.use(express.json()); // parse json bodies in the request object
 
 // Redirect requests to endpoint starting with /posts to postRoutes.js
 app.use("/posts", require("./postRoutes"));
+// app.use("/studentlogin", require("./postRoutes"));
 
 // Redirect requests to endpoint starting with /show to showRoutes.js
 // app.use("/")

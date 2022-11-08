@@ -2,23 +2,38 @@ import React, { useState } from "react";
 import useForm from "./useForm";
 import validate from "./LoginFormValidationRules";
 import { Redirect } from "react-router-dom";
+import Axios from "axios";
+import { object } from "prop-types";
 
 const LoginForm = props => {
+
+  localStorage.clear();
   const { values, errors, handleChange, handleSubmit } = useForm(
-    login,
     validate
   );
   const [loggedIn, setLoggedIn] = useState(false);
 
-  function login() {
-    setLoggedIn(true);
-    props.parentCallback(true);
-    return <Redirect to="/default" />;
+  // function login() {
+  //   setLoggedIn(true);
+  //   props.parentCallback(true);
+  // }
+
+  function onLogin(){
+    Axios
+      .get("http://localhost:3001/posts/studentlogin")
+      .then((res) => {
+        res.data.map((val) => {
+          if(val.mis === values.mis && val.password === values.password && val.email === values.email){
+            localStorage.setItem("mis",values.mis)
+            localStorage.setItem("password", values.password)
+            localStorage.setItem("email", values.email)
+          }
+        })
+      })
   }
 
   return (
     <div className="section is-fullheight">
-      {loggedIn && <Redirect to="/default" />}
       <div className="container">
         <div className="column is-6 is-offset-3">
           <div className="box">
@@ -80,6 +95,9 @@ const LoginForm = props => {
               <button
                 type="submit"
                 className="button is-block is-info is-fullwidth"
+                onClick = {() => {
+                  onLogin();
+                }}
               >
                 Login
               </button>

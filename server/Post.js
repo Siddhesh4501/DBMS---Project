@@ -1,4 +1,13 @@
 const db = require("./db")
+
+class StudentLogin { 
+
+    static async findAll() {
+        let sql = `SELECT mis, email, password FROM Student_Password;`
+        const [newPost, _] =await db.execute(sql);
+        return newPost;
+    }
+}
 class PostStudent {
     constructor(mis, first_name, last_name, email_id) {
         this.mis = mis;
@@ -222,4 +231,4 @@ class Answers {
 }
 
 
-module.exports = { PostStudent, PostCompany, PostInterviewExperience, PostQuestions,DoubtQuestions,Answers };
+module.exports = { PostStudent, PostCompany, PostInterviewExperience, PostQuestions,DoubtQuestions,Answers, StudentLogin };

@@ -7,6 +7,8 @@
 .rating>label::before {
     content: "\2605";
     position: absolute;
+    transform: translateY(-1em);
+    transform: translateX(2em);
     opacity: 0
 }
 
@@ -26,7 +28,7 @@
     width: 1em;
     font-size: 1.7vw;
     color: green;
-    cursor: pointer
+    cursor: pointer;
 }
 .titleform{
     font-size: 1.4rem;

@@ -4,9 +4,12 @@ const router = express.Router()
 
 router.route("/student").get(postControllers.getAllPostsStudent).post(postControllers.createNewPostStudent)
 router.route("/company").get(postControllers.getAllPostsCompany).post(postControllers.createNewPostCompany)
-router.route("/interview-experience").get(postControllers.getAllPostsInterviewExperience).post(postControllers.createNewPostInterviewExperience)
+router.route("/getcompany").get(postControllers.getAllPostsCompany)
+router.route("/getCompanyDetails").get(postControllers.getAllPostsCompanyDetails)
+router.route("/add-experience").get(postControllers.getAllPostsInterviewExperience).post(postControllers.createNewPostInterviewExperience)
 router.route("/questions").get(postControllers.getAllPostsQuestions).post(postControllers.createNewPostQuestions)
 router.route("/doubt").get(postControllers.getAllDoubts).post(postControllers.createNewDoubt)
 router.route("/ans/:id").get(postControllers.getAllAns).post(postControllers.createNewAns)
+router.route("/getcompany/:mis").get(postControllers.getPostByMisCompany)
 router.route("/studentlogin").get(postControllers.getAllStudentPasswords)
 module.exports = router

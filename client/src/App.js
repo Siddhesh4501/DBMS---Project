@@ -20,6 +20,8 @@ const AddQue = lazy(() => import('./pages/AddQue'));
 const AddAns = lazy(() => import('./pages/AddAns'));
 const SeeAns = lazy(() => import('./pages/SeeAns'));
 const login = lazy(() => import('./pages/Login'));
+const companies = lazy(() => import('./pages/Companies'));
+const addInterviewQuestions = lazy(() => import('./pages/AddInterviewQuestions'));
 
 const App = () => (
   <BrowserRouter basename={PUBLIC_URL}>
@@ -36,6 +38,8 @@ const App = () => (
         <Route path="/addque" component={AddQue} />
         <Route path="/addans/:id" component={AddAns} />
         <Route path="/seeans/:id" component={SeeAns} />
+        <Route path="/companies" component={companies} />
+        <Route path="/add-interview-questions" component={addInterviewQuestions} />
         <Route component={NotFound} status={404} />
       </Switch>
     </Suspense>

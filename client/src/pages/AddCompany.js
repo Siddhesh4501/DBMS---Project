@@ -6,30 +6,6 @@ const AddCompany = () => (
     title="AddCompany"
     description="Michael D'Angelo's Resume. Arthena, Matroid, YC, Skeptical Investments, Stanford ICME, Planet Labs, and Facebook."
   >
-    {/* form for student */}
-    {/* <h1>Student's Data</h1>
-    <form action="">
-      <div className="form-group">
-        <label htmlFor="mis">Mis</label>
-        <input id="mis" type="text" className="form-control" />
-      </div>
-      <div className="form-group">
-        <label htmlFor="first_name">First Name</label>
-        <input id="first_name" type="text" className="form-control" />
-      </div>
-      <div className="form-group">
-        <label htmlFor="last_name">Last Name</label>
-        <input id="last_name" type="text" className="form-control" />
-      </div>
-      <div className="form-group">
-        <label htmlFor="email_id">Email Id</label>
-        <input id="email_id" type="text" className="form-control" />
-      </div>
-      <div>
-        <br />
-      </div>
-      <button className="btn btn-primary">Submit</button>
-    </form> */}
 
     <h1>Company Data</h1>
     <form action="">

@@ -1,96 +1,131 @@
 import React from 'react';
-import "./AddExperience.css"
+// import "./AddExperience.css"
 import Main from '../layouts/Main';
+import { useState, useEffect } from 'react';
+import Select from 'react-select';
+// import { useNavigate } from 'react-router-dom';
+const AddExperience = () => {
+    // const navigate = useNavigate();
+    // const navigateToQuestions = () => {
+    //     navigate('/add-experience');
+    // };
+    const [inputs, setInputs] = useState({});
+    // const mis = localStorage.getItem("mis")
+    let [companies, setcompany] = useState([])
 
-const AddExperience = () => (
-    <Main>
+    // console.log(id);
+    const getdata = async () => {
+        let url = `http://localhost:3001/posts/getcompany`;
+        let data = await fetch(url);
+        // console.log(data);
+        let parsedata = await data.json();
+        // console.log(parsedata)
+        setcompany(parsedata)
+        // console.log(companies)
+    }
+    useEffect(() => {
+        getdata();
+    }, []);
+
+    useEffect(() => {
+        // console.log(companies);
+    }, [companies]);
+
+    let company_lst = []
+    // let company_lst = []
+    companies.forEach((item) => {
+        let tmp = { "label": item.company_name, "value": item.company_name }
+        company_lst.push(tmp)
+    })
+
+    const handleChange = (event) => {
+        const name = event.target.name;
+        const value = event.target.value;
+        setInputs(values => ({ ...values, [name]: value }))
+        setInputs(values => ({ ...values, ["mis"]: localStorage.getItem("mis") }));
+    }
+    const handleCompanyChange = (event) => {
+        console.log(event)
+        const name = event.target.name;
+        const value = event.target.value;
+        setInputs(values => ({ ...values, [name]: value }))
+        setInputs(values => ({ ...values, ["mis"]: localStorage.getItem("mis") }));
+    }
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        console.log(inputs);
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(inputs)
+        };
+        let url = "http://localhost:3001/posts/add-experience";
+        let data = await fetch(url, requestOptions);
+        // console.log(data);
+        let parsedata = await data.json();
+        // console.log(parsedata)
+        // alert(inputs);
+        alert(parsedata["status"]);
+    }
+
+    return (<Main>
         <h1>Tell Us about your experience</h1>
-        <form action="">
-            <div className="form-group">
-                <label htmlFor="mis">Mis</label>
-                <input id="mis" type="text" className="form-control" />
-            </div>
-            <br />
-
+        <form className="form" onSubmit={handleSubmit}>
             <div className="form-group">
                 <label htmlFor="company_name">Company Name</label>
-                <input id="company_name" type="text" className="form-control" />
+                <Select
+                    className="drop-down"
+                    options={company_lst}
+                    name="company_name"
+                    onChange={opt => Select.value = opt.value}
+                // onChange={handleCompanyChange}
+                // onChange="opt => Select.value = opt.value; this.handleChange(); console.log('Was here')"
+                />
             </div>
             <br />
             <div className="form-group">
                 <label htmlFor="rating">Company rating</label>
-                <div class="rating">
-                    <input type="radio" onClick={(e) => setrating(e.target.value)} name="rating" value="5" id="5"></input>
-                    <label for="5">☆</label>
-                    <input type="radio" onClick={(e) => setrating(e.target.value)} name="rating" value="4" id="4"></input>
-                    <label for="4">☆</label>
-                    <input type="radio" onClick={(e) => setrating(e.target.value)} name="rating" value="3" id="3"></input>
-                    <label for="3">☆</label>
-                    <input type="radio" onClick={(e) => setrating(e.target.value)} name="rating" value="2" id="2"></input>
-                    <label for="2">☆</label>
-                    <input type="radio" onClick={(e) => setrating(e.target.value)} name="rating" value="1" id="1"></input>
-                    <label for="1">☆</label>
+                {/* <div class="rating"> */}
+                <div>
+                    <input type="radio" name="rating" id="1" value="1" onChange={handleChange}></input>
+                    <label htmlFor="1">1</label>
+                    <input type="radio" name="rating" id="2" value="2" onChange={handleChange}></input>
+                    <label htmlFor="2">2</label>
+                    <input type="radio" name="rating" id="3" value="3" onChange={handleChange}></input>
+                    <label htmlFor="3">3</label>
+                    <input type="radio" name="rating" id="4" value="4" onChange={handleChange}></input>
+                    <label htmlFor="4">4</label>
+                    <input type="radio" name="rating" id="5" value="5" onChange={handleChange}></input>
+                    <label htmlFor="5">5</label>
                 </div>
             </div>
             <br />
 
             <div className="form-group">
                 <label htmlFor="overall_experience">Overall Experience </label>
-                <input id="overall_experience" type="text" className="form-control" />
+                <input name="overall_experience" id="overall_experience" type="text" className="form-control" value={inputs.overall_experience || ""} onChange={handleChange} />
             </div>
             <br />
 
             <div className="form-group">
                 <label htmlFor="verdict">Verdict</label>
                 <br />
-                <input type="radio" name="selected"></input>
-                <label>Selected</label>
-                <input type="radio" name="not_selected"></input>
-                <label>Not Selected</label>
+                <div>
+
+                    <input type="radio" name="verdict" value="selected" id="selected" onChange={handleChange} />
+                    <label htmlFor="selected">Selected</label>
+                    <input type="radio" name="verdict" value="not_selected" id="not_selected" onChange={handleChange} />
+                    <label htmlFor="not_selected">Not Selected</label>
+                </div>
             </div>
             <div>
                 <br />
             </div>
             <button className="button">Submit</button>
+            {/* <button className="button"  onClick={navigateToQuestions}>Submit</button> */}
         </form>
-        <br />
-        <br />
-        <h1>Questions Asked</h1>
-        <form action="">
-            <div className="form-group">
-                <label htmlFor="mis">Mis</label>
-                <input id="mis" type="text" className="form-control" />
-            </div>
-            <br />
-            <div className="form-group">
-                <label htmlFor="question_tag">Question Type</label>
-                <br />
-                <input type="radio" name="dsa"></input>
-                <label>Dsa</label>
-                <input type="radio" name="core"></input>
-                <label>Core</label>
-                <input type="radio" name="hr"></input>
-                <label>HR</label>
-            </div>
-            <br />
-
-            <div className="form-group">
-                <label htmlFor="question_description">Question</label>
-                <input id="question_description" type="text" className="form-control" />
-            </div>
-            <br />
-            <div className="form-group">
-                <label htmlFor="company_name">Company Name</label>
-                <input id="company_name" type="text" className="form-control" />
-            </div>
-            <br />
-
-            <div>
-                <br />
-            </div>
-            <button className="button">Submit</button>
-        </form>
-    </Main>
-);
+    </Main>)
+};
 
 export default AddExperience;

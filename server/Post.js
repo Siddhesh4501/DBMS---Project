@@ -1,10 +1,10 @@
 const db = require("./db")
 
-class StudentLogin { 
+class StudentLogin {
 
     static async findAll() {
         let sql = `SELECT mis, email, password FROM Student_Password;`
-        const [newPost, _] =await db.execute(sql);
+        const [newPost, _] = await db.execute(sql);
         return newPost;
     }
 }
@@ -67,9 +67,25 @@ class PostCompany {
         return newPost
     }
 
-    static findAll() {
+    static async findAll() {
         let sql = "SELECT * FROM company;"
-        return devicePixelRatio.execute(sql)
+        const [newPost, _] = await db.execute(sql);
+        return newPost;
+    }
+
+    static async findAllByMis(mis) {
+        let sql = `SELECT company_name from company 
+                    JOIN interview_experience
+                    ON interview_experience.company_id = company.company_id
+                   where interview_experience.mis ="${mis}";`
+        const [newPost, _] = await db.execute(sql);
+        return newPost;
+    }
+
+    static async findCompanyName() {
+        let sql = "SELECT company_name FROM company;"
+        const [newPost, _] = await db.execute(sql);
+        return newPost;
     }
 
 }
@@ -176,11 +192,11 @@ class DoubtQuestions {
     constructor(mis, company_id, doubt) {
         this.mis = mis;
         this.company_id = company_id;
-        this.doubt=doubt
+        this.doubt = doubt
     }
 
     async save() {
-            let sql = `
+        let sql = `
             INSERT INTO doubt_forum(mis,company_id,doubt) VALUES(
                 "${this.mis}",    
                 "${this.company_id}",    
@@ -194,8 +210,8 @@ class DoubtQuestions {
     static async findAll() {
         let sql = `SELECT Doubt_Forum.doubt_id,Doubt_Forum.mis,Doubt_Forum.company_id,Doubt_Forum.doubt,student.first_name,student.last_name,company.company_name FROM doubt_forum
                    JOIN student on Doubt_Forum.mis=student.mis JOIN company on Doubt_Forum.company_id=company.company_id`
-         const [newPost, _] =await db.execute(sql);
-         return newPost;
+        const [newPost, _] = await db.execute(sql);
+        return newPost;
     }
 
 }
@@ -205,11 +221,11 @@ class Answers {
     constructor(doubt_id, mis, ans) {
         this.doubt_id = doubt_id;
         this.mis = mis;
-        this.ans=ans;
+        this.ans = ans;
     }
 
     async save() {
-            let sql = `
+        let sql = `
             INSERT INTO answers VALUES(
                 "${this.doubt_id}",    
                 "${this.mis}",    
@@ -224,11 +240,11 @@ class Answers {
         let sql = `SELECT answers.doubt_id,Doubt_Forum.company_id,answers.mis,answers.answer,student.first_name,student.last_name,company.company_name FROM answers
                    JOIN student on answers.mis=student.mis JOIN Doubt_Forum on Doubt_Forum.doubt_id= answers.doubt_id JOIN company on company.company_id=Doubt_Forum.company_id
                    where answers.doubt_id="${id}";`
-         const [newPost, _] =await db.execute(sql);
-         return newPost;
+        const [newPost, _] = await db.execute(sql);
+        return newPost;
     }
 
 }
 
 
-module.exports = { PostStudent, PostCompany, PostInterviewExperience, PostQuestions,DoubtQuestions,Answers, StudentLogin };
+module.exports = { PostStudent, PostCompany, PostInterviewExperience, PostQuestions, DoubtQuestions, Answers, StudentLogin };

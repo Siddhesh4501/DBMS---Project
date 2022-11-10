@@ -171,3 +171,13 @@ exports.createNewAns = async (req, res, next) => {
         res.send({ status: "Error" });
     }
 }
+
+exports.getStudentDetails = async (req, res, next) => {
+    let details= await PostStudent.findAllStudentwithInfo();
+    console.log(details);
+    res.send(details);
+
+
+
+
+}

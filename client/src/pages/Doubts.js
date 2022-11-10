@@ -13,7 +13,7 @@ import "./stats.css"
 
 
 
-const Stats = () => {
+const Doubts = () => {
   let [doubts, setdoubts] = useState([])
 //   const requestOptions = {
 //     method: 'GET'
@@ -65,4 +65,4 @@ return(
   </Main>)
 };
 
-export default Stats;
+export default Doubts;

@@ -12,4 +12,5 @@ router.route("/doubt").get(postControllers.getAllDoubts).post(postControllers.cr
 router.route("/ans/:id").get(postControllers.getAllAns).post(postControllers.createNewAns)
 router.route("/getcompany/:mis").get(postControllers.getPostByMisCompany)
 router.route("/studentlogin").get(postControllers.getAllStudentPasswords)
+router.route("/getStudentDetails").get(postControllers.getStudentDetails)
 module.exports = router

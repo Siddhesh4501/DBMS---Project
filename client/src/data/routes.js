@@ -5,12 +5,12 @@ const routes = [
     path: '/',
   },
   {
-    label: 'About',
-    path: '/about',
-  },
-  {
     label: 'Comany Details',
     path: '/companies',
+  },
+  {
+    label: 'Student Details',
+    path: '/studentInfo',
   },
   {
     label: 'Add Company',
@@ -31,11 +31,7 @@ const routes = [
   {
     label: 'Doubts',
     path: '/seedoubt',
-  },
-  {
-    label: 'Contact',
-    path: '/contact',
-  },
+  }
 ];
 
 export default routes;

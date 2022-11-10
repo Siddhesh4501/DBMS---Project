@@ -20,7 +20,7 @@ import "./AddAns.css"
 const AddAns = (props) => {
   let id = props.match.params.id;
   const [inputs, setInputs] = useState({});
-  localStorage.setItem("mis", 112003112);
+  // localStorage.setItem("mis", 112003112);
 
   const handleChange = (event) => {
     const name = event.target.name;

@@ -34,7 +34,17 @@ class PostStudent {
         let sql = "SELECT * FROM students;"
         return devicePixelRatio.execute(sql)
     }
-
+    static async findAllStudentwithInfo(){
+        let sql= `select student.mis,student.first_name,student.last_name,student.email_id,Interview_Experience.Company_id,company.Company_name,company.stipend 
+        from student
+        JOIN
+        Interview_Experience ON student.mis=Interview_Experience.mis 
+        JOIN
+        company ON company.company_id=Interview_Experience.company_id 
+        where Interview_Experience.result="selected";`;
+        const [newPost, _] = await db.execute(sql);
+        return newPost;
+    }
 }
 
 class PostCompany {

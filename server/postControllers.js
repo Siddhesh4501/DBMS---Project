@@ -62,9 +62,8 @@ exports.getAllPostsInterviewExperience = async (req, res, next) => {
 }
 
 exports.createNewPostInterviewExperience = async (req, res, next) => {
-    let { mis, company_name, interview_rating, overall_experience, verdict } = req.body
-    let company_id = 0 // execute a query and get an ans; 
-    let post = new PostInterviewExperience(mis, company_name, interview_rating, overall_experience, verdict)
+    let { interview_rating, mis, company_name, overall_experience, verdict } = req.body
+    let post = new PostInterviewExperience(interview_rating, mis, company_name, overall_experience, verdict)
     post = await post.save()
     console.log(post)
     res.send("Create New Post Route")
@@ -173,7 +172,7 @@ exports.createNewAns = async (req, res, next) => {
 }
 
 exports.getStudentDetails = async (req, res, next) => {
-    let details= await PostStudent.findAllStudentwithInfo();
+    let details = await PostStudent.findAllStudentwithInfo();
     console.log(details);
     res.send(details);
 

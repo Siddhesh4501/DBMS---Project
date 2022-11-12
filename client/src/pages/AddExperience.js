@@ -43,16 +43,9 @@ const AddExperience = () => {
         const name = event.target.name;
         const value = event.target.value;
         setInputs(values => ({ ...values, [name]: value }))
-        setInputs(values => ({ ...values, ["mis"]: localStorage.getItem("mis") }));
-        // setInputs(values => ({ ...values, ["company_name"]: company_nm.company_name }))
-    }
-
-    const handleCompanyChange = (event, opt) => {
-        console.log(event)
-        const name = event.target.name;
-        const value = event.target.value;
-        setInputs(values => ({ ...values, [name]: opt.value }))
-        // setInputs(values => ({ ...values, ["mis"]: localStorage.getItem("mis") }));
+        // setInputs(values => ({ ...values, ["mis"]: "112003117", ["company_name"]: Select.value }));
+        setInputs(values => ({ ...values, ["mis"]: localStorage.getItem("mis"), ["company_name"]: Select.value }));
+        // setInputs(values => ({ ...values, ["company_name"]: "BNY Mellon" }));
     }
 
     const handleSubmit = async (event) => {
@@ -80,26 +73,27 @@ const AddExperience = () => {
                     className="drop-down"
                     options={company_lst}
                     name="company_name"
-                    value={inputs.company_name || ""}
-                    // onChange={opt => Select.value = opt.value}
-                    onChange={handleCompanyChange}
+                    // value={inputs.company_name || ""}
+                    onChange={opt => Select.value = opt.value}
+                // onChange={opt => console.log(opt.value)}
+                // onChange={handleCompanyChange}
                 // onChange="opt => Select.value = opt.value; this.handleChange(); console.log('Was here')"
                 />
             </div>
             <br />
             <div className="form-group">
-                <label htmlFor="rating">Company rating</label>
+                <label htmlFor="interview_rating">Company rating</label>
                 {/* <div class="rating"> */}
                 <div>
-                    <input type="radio" name="rating" id="1" value="1" onChange={handleChange}></input>
+                    <input type="radio" name="interview_rating" id="1" value="1" onChange={handleChange}></input>
                     <label htmlFor="1">1</label>
-                    <input type="radio" name="rating" id="2" value="2" onChange={handleChange}></input>
+                    <input type="radio" name="interview_rating" id="2" value="2" onChange={handleChange}></input>
                     <label htmlFor="2">2</label>
-                    <input type="radio" name="rating" id="3" value="3" onChange={handleChange}></input>
+                    <input type="radio" name="interview_rating" id="3" value="3" onChange={handleChange}></input>
                     <label htmlFor="3">3</label>
-                    <input type="radio" name="rating" id="4" value="4" onChange={handleChange}></input>
+                    <input type="radio" name="interview_rating" id="4" value="4" onChange={handleChange}></input>
                     <label htmlFor="4">4</label>
-                    <input type="radio" name="rating" id="5" value="5" onChange={handleChange}></input>
+                    <input type="radio" name="interview_rating" id="5" value="5" onChange={handleChange}></input>
                     <label htmlFor="5">5</label>
                 </div>
             </div>
@@ -116,9 +110,9 @@ const AddExperience = () => {
                 <br />
                 <div>
 
-                    <input type="radio" name="verdict" value="selected" id="selected" onChange={handleChange} />
+                    <input type="radio" name="verdict" value="Selected" id="selected" onChange={handleChange} />
                     <label htmlFor="selected">Selected</label>
-                    <input type="radio" name="verdict" value="not_selected" id="not_selected" onChange={handleChange} />
+                    <input type="radio" name="verdict" value="Not Selected" id="not_selected" onChange={handleChange} />
                     <label htmlFor="not_selected">Not Selected</label>
                 </div>
             </div>

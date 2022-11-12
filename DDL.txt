@@ -1,6 +1,5 @@
 create database internship;
 use internship;
-
 create table Student(
     mis varchar(10),
     first_name varchar(20),
@@ -10,7 +9,7 @@ create table Student(
 );
 
 create table Company(
-     company_id varchar(10),
+     company_id int NOT NULL AUTO_INCREMENT,
      company_name varchar(20),
      role varchar(20),
      location varchar(20),
@@ -23,10 +22,10 @@ create table Company(
 
 create table Interview_Experience(
     mis varchar(10),
-    company_id varchar(10),
+    company_id int,
     interview_rating int,
     overall_experience varchar(100),
-    result varchar(10),
+    verdict varchar(15),
     PRIMARY KEY (mis,company_id),
     FOREIGN KEY (mis) references Student(mis),
     FOREIGN KEY (company_id) references Company(company_id)        
@@ -35,7 +34,7 @@ create table Interview_Experience(
 create table DSA_Questions(
     mis varchar(10),
     question_description varchar(100),
-    company_id varchar(10),
+    company_id int,
     PRIMARY KEY (MIS,question_description),
     FOREIGN KEY (mis,company_id) references Interview_Experience(mis,company_id)
 );
@@ -44,7 +43,7 @@ create table DSA_Questions(
 create table Core_Questions(
     mis varchar(10),
     question_description varchar(100),
-    company_id varchar(10),
+    company_id int,
     PRIMARY KEY (MIS,question_description),
     FOREIGN KEY (mis,company_id) references Interview_Experience(mis,company_id)
 );
@@ -53,7 +52,7 @@ create table Core_Questions(
 create table HR_Questions(
     mis varchar(10),
     question_description varchar(100),
-    company_id varchar(10),
+    company_id int,
     PRIMARY KEY (MIS,question_description),
     FOREIGN KEY (mis,company_id) references Interview_Experience(mis,company_id)
 );
@@ -61,7 +60,7 @@ create table HR_Questions(
 create table Doubt_Forum(
     doubt_id int NOT NULL AUTO_INCREMENT,
     mis varchar(10),
-    company_id varchar(10),
+    company_id int,
     doubt varchar(100),
     PRIMARY KEY(doubt_id),
     FOREIGN KEY (mis) references Student(mis),
@@ -80,8 +79,9 @@ alter table doubt_forum  AUTO_INCREMENT=100;
 insert into Student values("112003112", "Siddhesh", "Pawar", "sidsir@gmail.com");
 insert into Student values("112003116", "Shyam", "Randar", "shyam@gmail.com");
 insert into Student values("112003114", "Prerna", "Tulsiani", "prerna@gmail.com");
-insert into Company values("1","BNY Mellon","SDE","Pune",75000,2,13,120);
-insert into Company values("2","Deutsche bank","SDE","Pune",75000,2,11,110);
+insert into Student values("112003117", "Ritesh", "Chaudhari", "sir@gmail.com");
+insert into Company values(1,"BNY Mellon","SDE","Pune",75000,2,13,120);
+insert into Company values(2,"Deutsche bank","SDE","Pune",75000,2,11,110);
 insert into interview_experience values("112003112","1",4,"Good","Selected");
 insert into interview_experience values("112003116","1",3,"Ok","Selected");
 insert into interview_experience values("112003114","2",5,"Very Good","Selected");
@@ -98,8 +98,11 @@ create table Student_Password(
 );
 
 insert into Student_Password values("112003114","prernat20.comp@coep.ac.in","1234");
-
 insert into doubt_forum(mis,company_id,doubt) values(112003112,1,"what are questions");
 insert into doubt_forum(mis,company_id,doubt) values(112003114,2,"how about sql");
 
 insert into answers values(100,112003112,"The questions was great");
+select * from interview_experience;
+select * from dsa_questions;
+select * from core_questions;
+select * from company;

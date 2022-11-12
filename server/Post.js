@@ -1,13 +1,13 @@
 const db = require("./db")
 
 class StudentLogin {
-
     static async findAll() {
         let sql = `SELECT mis, email, password FROM Student_Password;`
         const [newPost, _] = await db.execute(sql);
         return newPost;
     }
 }
+
 class PostStudent {
     constructor(mis, first_name, last_name, email_id) {
         this.mis = mis;
@@ -34,8 +34,8 @@ class PostStudent {
         let sql = "SELECT * FROM students;"
         return devicePixelRatio.execute(sql)
     }
-    static async findAllStudentwithInfo(){
-        let sql= `select student.mis,student.first_name,student.last_name,student.email_id,Interview_Experience.Company_id,company.Company_name,company.stipend 
+    static async findAllStudentwithInfo() {
+        let sql = `select student.mis,student.first_name,student.last_name,student.email_id,Interview_Experience.Company_id,company.Company_name,company.stipend 
         from student
         JOIN
         Interview_Experience ON student.mis=Interview_Experience.mis 
@@ -100,7 +100,7 @@ class PostCompany {
 }
 
 class PostInterviewExperience {
-    constructor(mis, company_name, interview_rating, overall_experience, verdict) {
+    constructor(interview_rating, mis, company_name, overall_experience, verdict) {
         this.mis = mis;
         this.company_name = company_name;
         this.interview_rating = interview_rating;
@@ -112,10 +112,10 @@ class PostInterviewExperience {
 
 
         let sql = `
-        INSERT INTO interview_experience(mis, interview_rating, overall_experience, verdict, company_id)
+        INSERT INTO interview_experience(interview_rating, mis, overall_experience, verdict, company_id)
             SELECT 
+            "${this.interview_rating}",
             "${this.mis}",    
-            "${this.interview_rating}",    
             "${this.overall_experience}",
             "${this.verdict}",
             company.company_id FROM company 

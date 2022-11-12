@@ -26,6 +26,13 @@ const AddCompany = () => {
     let parsedata = await data.json();
     // console.log(parsedata)
     // alert(inputs);
+    // if(error){
+    //   this.setState({formError: true, formSuccess: false});
+    // }
+    // else{
+    //   this.setState({formError: false, formSuccess: true});
+    // }
+
     alert(parsedata["status"]);
   }
 
@@ -50,22 +57,22 @@ const AddCompany = () => {
       <br />
       <div className="form-group">
         <label htmlFor="stipend">Stipend</label>
-        <input name="stipend" id="stipend" type="number" className="form-control" value={inputs.stipend || ""} onChange={handleChange} />
+        <input name="stipend" id="stipend" type="number" className="form-control" min="0" value={inputs.stipend || ""} onChange={handleChange} />
       </div>
       <br />
       <div className="form-group">
         <label htmlFor="no_of_rounds">Number of Rounds</label>
-        <input name="no_of_rounds" id="no_of_rounds" type="number" className="form-control" value={inputs.no_of_rounds || ""} onChange={handleChange} />
+        <input name="no_of_rounds" id="no_of_rounds" type="number" className="form-control" min="0" value={inputs.no_of_rounds || ""} onChange={handleChange} />
       </div>
       <br />
       <div className="form-group">
         <label htmlFor="no_of_people_selected">Number of students recruited</label>
-        <input name="no_of_people_selected" id="no_of_people_selected" type="number" className="form-control" value={inputs.no_of_people_selected || ""} onChange={handleChange} />
+        <input name="no_of_people_selected" id="no_of_people_selected" type="number" min="0" className="form-control" value={inputs.no_of_people_selected || ""} onChange={handleChange} />
       </div>
       <br />
       <div className="form-group">
         <label htmlFor="duration_of_aptitude">Duration of Aptitude</label>
-        <input name="duration_of_aptitude" id="duration_of_aptitude" type="number" className="form-control" value={inputs.duration_of_aptitude || ""} onChange={handleChange} />
+        <input name="duration_of_aptitude" id="duration_of_aptitude" type="number" min="0" className="form-control" value={inputs.duration_of_aptitude || ""} onChange={handleChange} />
       </div>
       <br />
       <button className="button" type="submit">Submit</button>

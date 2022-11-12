@@ -40,7 +40,8 @@ const AddInterviewQuestions = () => {
         const name = event.target.name;
         const value = event.target.value;
         setInputs(values => ({ ...values, [name]: value }))
-        setInputs(values => ({ ...values, ["mis"]: localStorage.getItem("mis") }));
+        // setInputs(values => ({ ...values, ["mis"]: "112003117", ["company_name"]: Select.value }));
+        setInputs(values => ({ ...values, ["mis"]: localStorage.getItem("mis"), ["company_name"]: Select.value }));
     }
 
     const handleSubmit = async (event) => {
@@ -52,7 +53,7 @@ const AddInterviewQuestions = () => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(inputs)
         };
-        let url = `http://localhost:3001/posts/add-experience${mis}`;
+        let url = `http://localhost:3001/posts/questions`;
         let data = await fetch(url, requestOptions);
         console.log(data);
         let parsedata = await data.json();

@@ -8,6 +8,14 @@ class StudentLogin {
     }
 }
 
+class Interview_Experience {
+    static async findAll() {
+        let sql = `SELECT student.first_name, student.last_name, student.email_id,company.company_name, interview_experience.company_id,interview_experience.mis, interview_experience.interview_rating, interview_experience.overall_experience,interview_experience.verdict from interview_experience join company on interview_experience.company_id = company.company_id join student on interview_experience.mis = student.mis;`
+        const [newPost, _] = await db.execute(sql);
+        return newPost;
+    }
+}
+
 class PostStudent {
     constructor(mis, first_name, last_name, email_id) {
         this.mis = mis;
@@ -266,4 +274,4 @@ class Answers {
 }
 
 
-module.exports = { PostStudent, PostCompany, PostInterviewExperience, PostQuestions, DoubtQuestions, Answers, StudentLogin };
+module.exports = { PostStudent, PostCompany, PostInterviewExperience, PostQuestions, DoubtQuestions, Answers, StudentLogin, Interview_Experience };

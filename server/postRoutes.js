@@ -13,4 +13,5 @@ router.route("/ans/:id").get(postControllers.getAllAns).post(postControllers.cre
 router.route("/getcompany/:mis").get(postControllers.getPostByMisCompany)
 router.route("/studentlogin").get(postControllers.getAllStudentPasswords)
 router.route("/getStudentDetails").get(postControllers.getStudentDetails)
+router.route("/getExpeCompnayWise").get(postControllers.getInterviewExperienceCompanyWise)
 module.exports = router

@@ -48,12 +48,12 @@ class PostStudent {
 }
 
 class PostCompany {
-    constructor(company_id, company_name, role, location, stipend, no_of_rounds, no_of_people_selected, duration_of_aptitude) {
-        this.company_id = company_id;
+    constructor(company_name, role, location, stipend, no_of_rounds, no_of_people_selected, duration_of_aptitude) {
+        // console.log(company_name, role, location, stipend, no_of_rounds, no_of_people_selected, duration_of_aptitude)
         this.company_name = company_name;
         this.role = role;
-        this.location = location;
         this.stipend = stipend;
+        this.location = location;
         this.no_of_rounds = no_of_rounds;
         this.no_of_people_selected = no_of_people_selected;
         this.duration_of_aptitude = duration_of_aptitude;
@@ -61,9 +61,8 @@ class PostCompany {
 
     async save() {
         let sql = `
-        INSERT INTO company VALUES(
-            ${this.company_id},    
-            "${this.company_name}",    
+        INSERT INTO company(company_name, role, location, stipend, no_of_rounds, no_of_people_selected, duration_of_aptitude) 
+        VALUES("${this.company_name}",    
             "${this.role}",    
             "${this.location}",
             "${this.stipend}",
@@ -101,23 +100,27 @@ class PostCompany {
 }
 
 class PostInterviewExperience {
-    constructor(mis, company_id, interview_rating, overall_experience, result) {
+    constructor(mis, company_name, interview_rating, overall_experience, verdict) {
         this.mis = mis;
-        this.company_id = company_id;
+        this.company_name = company_name;
         this.interview_rating = interview_rating;
         this.overall_experience = overall_experience;
-        this.result = result;
+        this.verdict = verdict;
     }
 
     async save() {
+
+
         let sql = `
-        INSERT INTO interview_experience VALUES(
+        INSERT INTO interview_experience(mis, interview_rating, overall_experience, verdict, company_id)
+            SELECT 
             "${this.mis}",    
-            "${this.company_id}",    
             "${this.interview_rating}",    
             "${this.overall_experience}",
-            "${this.result}"
-        );
+            "${this.verdict}",
+            company.company_id FROM company 
+            WHERE company.company_name = "${this.company_name}"
+        ;
         `
 
         const [newPost, _] = await db.execute(sql)
@@ -132,40 +135,46 @@ class PostInterviewExperience {
 }
 class PostQuestions {
 
-    constructor(question_tag, mis, question_description, company_id) {
+    constructor(question_tag, mis, question_description, company_name) {
         this.question_tag = question_tag;
         this.mis = mis;
         this.question_description = question_description;
-        this.company_id = company_id;
+        this.company_name = company_name;
     }
 
     async save() {
         let sql = ""
         if (this.question_tag == "dsa") {
             sql = `
-            INSERT INTO dsa_questions VALUES(
+            INSERT INTO dsa_questions (mis, question_description, company_id)
+            SELECT 
                 "${this.mis}",    
                 "${this.question_description}",    
-                "${this.company_id}"
-            );
+                company.company_id FROM company 
+                WHERE company.company_name = "${this.company_name}"
+            ;
             `
         }
         else if (this.question_tag == "core") {
             sql = `
-            INSERT INTO core_questions VALUES(
+            INSERT INTO core_questions (mis, question_description, company_id)
+            SELECT 
                 "${this.mis}",    
                 "${this.question_description}",    
-                "${this.company_id}"
-            );
+                company.company_id FROM company 
+                WHERE company.company_name = "${this.company_name}"
+            ;
             `
         }
         else {
             sql = `
-            INSERT INTO hr_questions VALUES(
+            INSERT INTO hr_questions (mis, question_description, company_id)
+            SELECT 
                 "${this.mis}",    
                 "${this.question_description}",    
-                "${this.company_id}"
-            );
+                company.company_id FROM company 
+                WHERE company.company_name = "${this.company_name}"
+            ;
             `
         }
 

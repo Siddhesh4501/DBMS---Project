@@ -41,8 +41,8 @@ exports.getAllPostsCompanyDetails = async (req, res, next) => {
 }
 
 exports.createNewPostCompany = async (req, res, next) => {
-    let { company_id, company_name, role, location, stipend, no_of_rounds, no_of_people_selected, duration_of_aptitude } = req.body
-    let post = new PostCompany(company_id, company_name, role, location, stipend, no_of_rounds, no_of_people_selected, duration_of_aptitude)
+    let { company_name, role, location, stipend, no_of_rounds, no_of_people_selected, duration_of_aptitude } = req.body
+    let post = new PostCompany(company_name, role, location, stipend, no_of_rounds, no_of_people_selected, duration_of_aptitude)
     post = await post.save()
     console.log(post)
     res.send("Create New Post Route")
@@ -62,9 +62,9 @@ exports.getAllPostsInterviewExperience = async (req, res, next) => {
 }
 
 exports.createNewPostInterviewExperience = async (req, res, next) => {
-    let { mis, overall_experience, interview_rating, verdict } = req.body
+    let { mis, company_name, interview_rating, overall_experience, verdict } = req.body
     let company_id = 0 // execute a query and get an ans; 
-    let post = new PostInterviewExperience(mis, company_id, interview_rating, overall_experience, verdict)
+    let post = new PostInterviewExperience(mis, company_name, interview_rating, overall_experience, verdict)
     post = await post.save()
     console.log(post)
     res.send("Create New Post Route")
@@ -80,8 +80,8 @@ exports.getAllPostsQuestions = async (req, res, next) => {
 }
 
 exports.createNewPostQuestions = async (req, res, next) => {
-    let { question_tag, mis, question_description, company_id } = req.body
-    let post = new PostQuestions(question_tag, mis, question_description, company_id)
+    let { question_tag, mis, question_description, company_name } = req.body
+    let post = new PostQuestions(question_tag, mis, question_description, company_name)
     post = await post.save()
     console.log(post)
     res.send("Create New Post Route")

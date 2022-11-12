@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import Select from 'react-select';
 // import { useNavigate } from 'react-router-dom';
 const AddExperience = () => {
+
     // const navigate = useNavigate();
     // const navigateToQuestions = () => {
     //     navigate('/add-experience');
@@ -43,13 +44,15 @@ const AddExperience = () => {
         const value = event.target.value;
         setInputs(values => ({ ...values, [name]: value }))
         setInputs(values => ({ ...values, ["mis"]: localStorage.getItem("mis") }));
+        // setInputs(values => ({ ...values, ["company_name"]: company_nm.company_name }))
     }
-    const handleCompanyChange = (event) => {
+
+    const handleCompanyChange = (event, opt) => {
         console.log(event)
         const name = event.target.name;
         const value = event.target.value;
-        setInputs(values => ({ ...values, [name]: value }))
-        setInputs(values => ({ ...values, ["mis"]: localStorage.getItem("mis") }));
+        setInputs(values => ({ ...values, [name]: opt.value }))
+        // setInputs(values => ({ ...values, ["mis"]: localStorage.getItem("mis") }));
     }
 
     const handleSubmit = async (event) => {
@@ -68,7 +71,6 @@ const AddExperience = () => {
         // alert(inputs);
         alert(parsedata["status"]);
     }
-
     return (<Main>
         <h1>Tell Us about your experience</h1>
         <form className="form" onSubmit={handleSubmit}>
@@ -78,8 +80,9 @@ const AddExperience = () => {
                     className="drop-down"
                     options={company_lst}
                     name="company_name"
-                    onChange={opt => Select.value = opt.value}
-                // onChange={handleCompanyChange}
+                    value={inputs.company_name || ""}
+                    // onChange={opt => Select.value = opt.value}
+                    onChange={handleCompanyChange}
                 // onChange="opt => Select.value = opt.value; this.handleChange(); console.log('Was here')"
                 />
             </div>

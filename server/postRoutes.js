@@ -15,4 +15,7 @@ router.route("/studentlogin").get(postControllers.getAllStudentPasswords)
 router.route("/getStudentDetails").get(postControllers.getStudentDetails)
 router.route("/getExpeCompanyWise").get(postControllers.getInterviewExperienceCompanyWise)
 router.route("/getCompanyFromExpe").get(postControllers.getDistinctCompanies)
+router.route("/coreQ").get(postControllers.getAllCoreQuestions)
+router.route("/dsaQ").get(postControllers.getAllDSAQuestions)
+router.route("/hrQ").get(postControllers.getAllHRQuestions)
 module.exports = router

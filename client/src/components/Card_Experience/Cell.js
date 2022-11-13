@@ -6,14 +6,13 @@ const Cell = ({ data }) => (
   <div className="cell-container">
     <article className="mini-post">
       <header>
-        <h3><a href={data.link}>{data.title}</a></h3>
-        <time className="published">{dayjs(data.date).format('MMMM, YYYY')}</time>
+        <h3><a href={data.first_name}>{data.last_name}</a></h3>
       </header>
-      <a href={data.link} className="image">
+      {/* <a href={data.link} className="image">
         <img src={`${process.env.PUBLIC_URL}${data.image}`} alt={data.title} />
-      </a>
+      </a> */}
       <div className="description">
-        <p>{data.desc}</p>
+        <p>{data.company_name}</p>
       </div>
     </article>
   </div>
@@ -21,11 +20,9 @@ const Cell = ({ data }) => (
 
 Cell.propTypes = {
   data: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    link: PropTypes.string,
-    image: PropTypes.string.isRequired,
-    date: PropTypes.string.isRequired,
-    desc: PropTypes.string.isRequired,
+    first_name: PropTypes.string.isRequired,
+    last_name: PropTypes.string,
+    company_name: PropTypes.string.isRequired,
   }).isRequired,
 };
 

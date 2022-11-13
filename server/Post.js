@@ -8,6 +8,30 @@ class StudentLogin {
     }
 }
 
+class CoreQ {
+    static async findAll() {
+        let sql = `select core_questions.mis, core_questions.question_description, company.company_name from core_questions join company on company.company_id = core_questions.company_id;`
+        const [newPost, _] = await db.execute(sql);
+        return newPost;
+    }
+}
+
+class DSAQ {
+    static async findAll() {
+        let sql = `select dsa_questions.mis, dsa_questions.question_description, company.company_name from dsa_questions join company on company.company_id = dsa_questions.company_id;`
+        const [newPost, _] = await db.execute(sql);
+        return newPost;
+    }
+}
+
+class HRQ {
+    static async findAll() {
+        let sql = `select hr_questions.mis, hr_questions.question_description, company.company_name from hr_questions join company on company.company_id = hr_questions.company_id;`
+        const [newPost, _] = await db.execute(sql);
+        return newPost;
+    }
+}
+
 class Interview_Experience {
     static async findAll() {
         let sql = `SELECT student.first_name, student.last_name, student.email_id,company.company_name, interview_experience.company_id,interview_experience.mis, interview_experience.interview_rating, interview_experience.overall_experience,interview_experience.verdict from interview_experience join company on interview_experience.company_id = company.company_id join student on interview_experience.mis = student.mis;`
@@ -282,4 +306,4 @@ class Answers {
 }
 
 
-module.exports = { CompanyFromExpe, PostStudent, PostCompany, PostInterviewExperience, PostQuestions, DoubtQuestions, Answers, StudentLogin, Interview_Experience };
+module.exports = { CoreQ, DSAQ, HRQ,CompanyFromExpe, PostStudent, PostCompany, PostInterviewExperience, PostQuestions, DoubtQuestions, Answers, StudentLogin, Interview_Experience };

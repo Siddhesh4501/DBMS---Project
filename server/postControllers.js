@@ -1,11 +1,26 @@
 const { execute } = require("./db")
-const { CompanyFromExpe,PostStudent, PostCompany, PostInterviewExperience, PostQuestions, DoubtQuestions, Answers, StudentLogin, Interview_Experience } = require("./Post")
+const { CoreQ, DSAQ, HRQ, CompanyFromExpe,PostStudent, PostCompany, PostInterviewExperience, PostQuestions, DoubtQuestions, Answers, StudentLogin, Interview_Experience } = require("./Post")
 
 exports.getAllStudentPasswords = async (req, res, next) => {
     let ans = await StudentLogin.findAll();
-    console.log(ans)
     res.send(ans);
 }
+
+exports.getAllCoreQuestions = async (req, res, next) => {
+    let ans = await CoreQ.findAll()
+    res.send(ans)
+}
+
+exports.getAllDSAQuestions = async (req, res, next) => {
+    let ans = await DSAQ.findAll()
+    res.send(ans)
+}
+
+exports.getAllHRQuestions = async (req, res, next) => {
+    let ans = await HRQ.findAll()
+    res.send(ans)
+}
+
 const { query } = require("./db")
 const db = require("./db")
 // const { PostStudent, PostCompany, PostInterviewExperience, PostQuestions, DoubtQuestions, Answers } = require("./Post")

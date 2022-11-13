@@ -24,6 +24,7 @@ const GetCompanies = (props) => {
         console.log(companies);
     }, [companies]);
 
+    console.log(companies)
     return (
         <Main
             title="Stats"

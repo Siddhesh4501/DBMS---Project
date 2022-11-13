@@ -57,7 +57,7 @@ class PostStudent {
         Interview_Experience ON student.mis=Interview_Experience.mis 
         JOIN
         company ON company.company_id=Interview_Experience.company_id 
-        where Interview_Experience.result="selected";`;
+        where Interview_Experience.verdict="selected";`;
         const [newPost, _] = await db.execute(sql);
         return newPost;
     }

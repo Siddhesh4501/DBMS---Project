@@ -1,7 +1,7 @@
 const routes = [
   {
     index: true,
-    label: "Michael D'Angelo",
+    label: "COEP TECH University",
     path: '/',
   },
   {
@@ -23,10 +23,6 @@ const routes = [
   {
     label: 'Add Questions',
     path: '/add-interview-questions',
-  },
-  {
-    label: 'Projects',
-    path: '/projects',
   },
   {
     label: 'Doubts',

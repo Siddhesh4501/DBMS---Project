@@ -1,3 +1,4 @@
+drop database internship;
 create database internship;
 use internship;
 create table Student(
@@ -100,7 +101,8 @@ create table Student_Password(
 insert into Student_Password values("112003114","prernat20.comp@coep.ac.in","1234");
 insert into doubt_forum(mis,company_id,doubt) values(112003112,1,"what are questions");
 insert into doubt_forum(mis,company_id,doubt) values(112003114,2,"how about sql");
-
+insert into Student value("112103114","Pruran","Tulsiani","pru.p@coep.ac.in");
+insert into Student_Password value("112103114","pru.p@coep.ac.in","1234");
 insert into answers values(100,112003112,"The questions was great");
 select * from interview_experience;
 select * from dsa_questions;

@@ -13,5 +13,6 @@ router.route("/ans/:id").get(postControllers.getAllAns).post(postControllers.cre
 router.route("/getcompany/:mis").get(postControllers.getPostByMisCompany)
 router.route("/studentlogin").get(postControllers.getAllStudentPasswords)
 router.route("/getStudentDetails").get(postControllers.getStudentDetails)
-router.route("/getExpeCompnayWise").get(postControllers.getInterviewExperienceCompanyWise)
+router.route("/getExpeCompanyWise").get(postControllers.getInterviewExperienceCompanyWise)
+router.route("/getCompanyFromExpe").get(postControllers.getDistinctCompanies)
 module.exports = router

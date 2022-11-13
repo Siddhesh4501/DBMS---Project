@@ -16,6 +16,14 @@ class Interview_Experience {
     }
 }
 
+class CompanyFromExpe {
+    static async findAll(){
+        let sql = `SELECT company_name from company where company_id in (SELECT distinct company_id from interview_experience);`
+        const [newPost, _] = await db.execute(sql);
+        return newPost;
+    }
+}
+
 class PostStudent {
     constructor(mis, first_name, last_name, email_id) {
         this.mis = mis;
@@ -274,4 +282,4 @@ class Answers {
 }
 
 
-module.exports = { PostStudent, PostCompany, PostInterviewExperience, PostQuestions, DoubtQuestions, Answers, StudentLogin, Interview_Experience };
+module.exports = { CompanyFromExpe, PostStudent, PostCompany, PostInterviewExperience, PostQuestions, DoubtQuestions, Answers, StudentLogin, Interview_Experience };

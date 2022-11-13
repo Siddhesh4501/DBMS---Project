@@ -1,5 +1,5 @@
 const { execute } = require("./db")
-const { PostStudent, PostCompany, PostInterviewExperience, PostQuestions, DoubtQuestions, Answers, StudentLogin, Interview_Experience } = require("./Post")
+const { CompanyFromExpe,PostStudent, PostCompany, PostInterviewExperience, PostQuestions, DoubtQuestions, Answers, StudentLogin, Interview_Experience } = require("./Post")
 
 exports.getAllStudentPasswords = async (req, res, next) => {
     let ans = await StudentLogin.findAll();
@@ -72,6 +72,11 @@ exports.createNewPostInterviewExperience = async (req, res, next) => {
 exports.getInterviewExperienceCompanyWise = async (req, res, next) => {
     let interviewExperience = await Interview_Experience.findAll();
     res.send(interviewExperience);
+}
+
+exports.getDistinctCompanies = async (req, res, next) => {
+    let ans = await CompanyFromExpe.findAll();
+    res.send(ans);
 }
 
 // for adding questions records

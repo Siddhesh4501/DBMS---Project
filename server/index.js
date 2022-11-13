@@ -13,7 +13,7 @@ app.use(express.json()); // parse json bodies in the request object
 
 // const db = mysql.createPool({
 //   port: 3306,
-//   host: "localhost",
+//   host: "localhost", 
 //   user: "root",
 //   password: "coep@123",
 //   database: "internship",

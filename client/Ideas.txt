@@ -1,5 +1,1 @@
 1. Student can add multiple questions in the form (maybe a "+" button)
-2. Ask if the Student has appeared for an interview or not. And only then show the option to add exp and questions
-3. Multiple interview exp
-4. Before adding company check if the name already exists in the database or not and only then add it.
-    (maybe a separate page for company)

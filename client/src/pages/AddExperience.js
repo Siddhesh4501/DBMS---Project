@@ -3,9 +3,10 @@ import React from 'react';
 import Main from '../layouts/Main';
 import { useState, useEffect } from 'react';
 import Select from 'react-select';
+// import { useHistory } from 'react-router-dom'
 // import { useNavigate } from 'react-router-dom';
 const AddExperience = () => {
-
+    // const history = useHistory();
     // const navigate = useNavigate();
     // const navigateToQuestions = () => {
     //     navigate('/add-experience');
@@ -49,7 +50,7 @@ const AddExperience = () => {
     }
 
     const handleSubmit = async (event) => {
-        event.preventDefault();
+        // event.preventDefault();
         console.log(inputs);
         const requestOptions = {
             method: 'POST',
@@ -63,10 +64,13 @@ const AddExperience = () => {
         // console.log(parsedata)
         // alert(inputs);
         alert(parsedata["status"]);
+        alert("Data added successfully")
+        // history.push('/add-interview-questions');
+        // navigate("/add-interview-questions");
     }
     return (<Main>
         <h1>Tell Us about your experience</h1>
-        <form className="form" onSubmit={handleSubmit}>
+        <form className="form" onSubmit={handleSubmit} action="/add-interview-questions">
             <div className="form-group">
                 <label htmlFor="company_name">Company Name</label>
                 <Select

@@ -27,6 +27,10 @@ const routes = [
   {
     label: 'Doubts',
     path: '/seedoubt',
+  },
+  {
+    label: 'Logout',
+    path: '/login'
   }
 ];
 

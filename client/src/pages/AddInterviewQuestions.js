@@ -9,7 +9,7 @@ const AddInterviewQuestions = () => {
     const [inputs, setInputs] = useState({});
     let [companies, setcompany] = useState([])
 
-    // console.log(id);
+    // console.log(id); 
     const getdata = async () => {
         const mis = localStorage.getItem("mis")
         console.log("mis is ", mis)
@@ -45,7 +45,7 @@ const AddInterviewQuestions = () => {
     }
 
     const handleSubmit = async (event) => {
-        event.preventDefault();
+        // event.preventDefault();
         console.log(inputs);
         console.log(inputs);
         const requestOptions = {
@@ -64,7 +64,7 @@ const AddInterviewQuestions = () => {
 
     return (<Main>
         <h1>Questions Asked</h1>
-        <form className="form" onSubmit={handleSubmit}>
+        <form className="form" onSubmit={handleSubmit} action="/add-interview-questions">
             <br />
             <div className="form-group">
                 <label htmlFor="company_name">Company Name</label>

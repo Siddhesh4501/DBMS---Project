@@ -1,6 +1,7 @@
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import Main from './layouts/Main'; // fallback for lazy pages
+import GetCoreQ from './pages/CoreQ';
 import './static/css/main.scss'; // All of our styles
 
 const { PUBLIC_URL } = process.env;
@@ -23,6 +24,9 @@ const login = lazy(() => import('./pages/Login'));
 const companies = lazy(() => import('./pages/Companies'));
 const addInterviewQuestions = lazy(() => import('./pages/AddInterviewQuestions'));
 const Student = lazy(() => import('./pages/Student'));
+const coreQ = lazy(() => import('./pages/CoreQ'))
+const dsaQ = lazy(() => import('./pages/DsaQ'));
+const hrQ = lazy(() => import('./pages/HrQ'));
 
 
 function App () {
@@ -36,6 +40,7 @@ function App () {
       <Switch>
         <Route exact path="/" component={Index} />
         <Route path="/login" component={login} />
+        <Route path="/core" component = {coreQ} />
         <Route path="/about" component={About} />
         <Route path="/experience" component={Projects} />
         <Route path="/seedoubt" component={Doubts} />
@@ -48,6 +53,8 @@ function App () {
         <Route path="/companies" component={companies} />
         <Route path="/add-interview-questions" component={addInterviewQuestions} />
         <Route path="/studentInfo" component={Student} />
+        <Route path ="/dsa" component = {dsaQ} />
+        <Route path = "/hr" component={hrQ} />
         <Redirect to = "/" />
         {/* <Route component={NotFound} status={404} /> */}
       </Switch>
@@ -58,8 +65,9 @@ function App () {
     routes = (
       <Switch>
         <Route exact path="/" component={Index} />
-        {/* <Route path="/login" component={login} /> */}
+        <Route path="/login" component={login} />
         <Route path="/about" component={About} />
+        <Route path="/core" component = {coreQ} />
         <Route path="/experience" component={Projects} />
         <Route path="/seedoubt" component={Doubts} />
         <Route path="/contact" component={Contact} />
@@ -71,6 +79,8 @@ function App () {
         <Route path="/companies" component={companies} />
         <Route path="/add-interview-questions" component={addInterviewQuestions} />
         <Route path="/studentInfo" component={Student} />
+        <Route path ="/dsa" component = {dsaQ} />
+        <Route path = "/hr" component={hrQ} />
         <Redirect to = "/" />
         {/* <Route component={NotFound} status={404} /> */}
       </Switch>

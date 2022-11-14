@@ -45,50 +45,51 @@ const Index = () => {
       company_lst.push(tmp);
     });
   });
-  let data = {};
+  let data = [];
   let verdict_list = [];
   verdict_list.push({ label: "Selected", value: "Selected" });
   verdict_list.push({ label: "Not Selected", value: "Not Selected" });
   var a = []
-  function onNext() {
-    data = [];
 
-    resultMIS = ['a','b']
+    resultMIS = []
     Axios.get("http://localhost:3001/posts/getExpeCompanyWise").then((res) => {
       res.data.map((val) => {
-        a.push({"mis":val.mis, "verdict":val.verdict,"company_name":val.company_name});
-      });
-    });
-    resultMIS.push('112')
-
-    console.log(a)
-
-    {
-      a.map((val) => {
         if (companyFilter === "Yes" && verdictFilter === "No") {
           if (val.company_name === company) {
             data.push(val);
-            resultMIS.push('b');
+            resultMIS.push(val.mis);
           }
         }
         if (verdictFilter === "Yes" && companyFilter === "No") {
           if (val.verdict === verdict) {
             data.push(val);
-            resultMIS.push('b');
+            resultMIS.push(val.mis);
           }
         }
         if (verdictFilter === "Yes" && companyFilter === "Yes") {
           if (val.verdict === verdict && val.company_name === company) {
             data.push(val);
-            resultMIS.push('b');
+            resultMIS.push(val.mis);
           }
         }
-      })
+      });
+    });
+    // resultMIS.push('112')
+
+    // console.log(a)
+    console.log(resultMIS, data)
+
+    const fun = async () => {
+      setExperiences(data)
+      // console.log(experiences)
     }
-    console.log(resultMIS)
-    console.log(resultMIS[0],resultMIS[1],resultMIS[2])
-    
-  }
+    // setExperiences(data);
+    // console.log(resultMIS[0],resultMIS[1],resultMIS[2])
+    //console.log(experiences)
+//   useEffect(() => {
+//     setExperiences(data)
+//     console.log(experiences);
+// }, [experiences]);
   return (
     <Main
       description={
@@ -171,28 +172,77 @@ const Index = () => {
               <p>e0irji0r</p>
             </article> */}
 
-          <Link to = {{pathname :"/experience", state: resultMIS}}>
+          {/* <Link to = {{pathname :"/experience", state: resultMIS}}> */}
       <button
         type="submit"
         className="button is-block is-info is-fullwidth"
         onClick={() => {
-          onNext();
+          fun();
         }}
+        style={{margin:"20px"}}
       >
         View Experience
       </button>
+      {/* </Link> */}
+      
+
+<Link to = {{pathname :"/core", state: resultMIS}}>
+      <button
+        type="submit"
+        className="button is-block is-info is-fullwidth"
+        // onClick={() => {
+        //   onNext();
+        // }}
+        style={{margin:"20px"}}
+      >
+        View CORE Questions
+      </button>
       </Link>
+
+      <Link to = {{pathname :"/dsa", state: resultMIS}}>
+      <button
+        type="submit"
+        className="button is-block is-info is-fullwidth"
+        // onClick={() => {
+        //   onNext();
+        // }}
+        style={{margin:"20px"}}
+      >
+        View DSA Questions
+      </button>
+      </Link>
+
+      <Link to = {{pathname :"/hr", state: resultMIS}}>
+      <button
+        type="submit"
+        className="button is-block is-info is-fullwidth"
+        style={{margin:"20px"}}
+        // onClick={() => {
+        //   onNext();
+        // }}
+      >
+        View HR Questions
+      </button>
+      </Link>
+
+
       {experiences.map((ele) => {
         return (
-          <h1>{ele.first_name}</h1>
+          <div className="card" style={{marginBottom:"20px"}}>
+          <div className="firstinfo">
+              <div className="profileinfo">
+                  <h3>{ele.first_name}{" "}{ele.last_name}</h3>
+                  <h4>Email ID: {ele.email_id}</h4>
+                  <h4>Compnay: {ele.company_name}</h4>
+                  <h4>Interview Rating: {ele.interview_rating}</h4>
+                  <h4>Overall Experience: {ele.overall_experience}</h4>
+                  <h4>Verdict: {ele.verdict}</h4>
+              </div>
+          </div>
+      </div>
+
         )
       })}
-      {experiences.length>=1 && (
-        <h1>
-          HEllo
-        </h1>
-      )}
-      
     </Main>
   );
 };

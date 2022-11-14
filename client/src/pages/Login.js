@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import useForm from "./useForm";
+import { Link } from "react-router-dom";
 import validate from "./LoginFormValidationRules";
 import { Redirect } from "react-router-dom";
 import Axios from "axios";
@@ -92,6 +93,7 @@ const LoginForm = props => {
                   <p className="help is-danger">{errors.password}</p>
                 )}
               </div>
+              <Link to={{pathname:"/home"}}>
               <button
                 type="submit"
                 className="button is-block is-info is-fullwidth"
@@ -100,7 +102,9 @@ const LoginForm = props => {
                 }}
               >
                 Login
+                
               </button>
+              </Link>
             </form>
           </div>
         </div>

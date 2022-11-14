@@ -1,5 +1,5 @@
 import React, { Suspense, lazy } from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import Main from './layouts/Main'; // fallback for lazy pages
 import './static/css/main.scss'; // All of our styles
 
@@ -25,9 +25,14 @@ const addInterviewQuestions = lazy(() => import('./pages/AddInterviewQuestions')
 const Student = lazy(() => import('./pages/Student'));
 
 
-const App = () => (
-  <BrowserRouter basename={PUBLIC_URL}>
-    <Suspense fallback={<Main />}>
+function App () {
+
+  let mis = localStorage.getItem("mis")
+  console.log(mis)
+
+  let routes;
+  if(!mis){
+    routes = (
       <Switch>
         <Route exact path="/" component={Index} />
         <Route path="/login" component={login} />
@@ -43,10 +48,40 @@ const App = () => (
         <Route path="/companies" component={companies} />
         <Route path="/add-interview-questions" component={addInterviewQuestions} />
         <Route path="/studentInfo" component={Student} />
-        <Route component={NotFound} status={404} />
+        <Redirect to = "/" />
+        {/* <Route component={NotFound} status={404} /> */}
       </Switch>
+    )
+  }
+
+  else{
+    routes = (
+      <Switch>
+        <Route exact path="/" component={Index} />
+        {/* <Route path="/login" component={login} /> */}
+        <Route path="/about" component={About} />
+        <Route path="/experience" component={Projects} />
+        <Route path="/seedoubt" component={Doubts} />
+        <Route path="/contact" component={Contact} />
+        <Route path="/add-company" component={AddCompany} />
+        <Route path="/add-experience" component={AddExperience} />
+        <Route path="/addque" component={AddQue} />
+        <Route path="/addans/:id" component={AddAns} />
+        <Route path="/seeans/:id" component={SeeAns} />
+        <Route path="/companies" component={companies} />
+        <Route path="/add-interview-questions" component={addInterviewQuestions} />
+        <Route path="/studentInfo" component={Student} />
+        <Redirect to = "/" />
+        {/* <Route component={NotFound} status={404} /> */}
+      </Switch>
+    )
+  }
+  return(
+  <BrowserRouter basename={PUBLIC_URL}>
+    <Suspense fallback={<Main />}>
+      <main>{routes}</main>
     </Suspense>
-  </BrowserRouter>
-);
+  </BrowserRouter>)
+};
 
 export default App;

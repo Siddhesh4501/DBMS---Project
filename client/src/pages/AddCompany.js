@@ -12,7 +12,7 @@ const AddCompany = () => {
   }
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
+    // event.preventDefault();
     // console.log(inputs);
     // console.log(inputs);
     const requestOptions = {
@@ -39,7 +39,7 @@ const AddCompany = () => {
   return (<Main>
 
     <h1>Company Data</h1>
-    <form className="form" onSubmit={handleSubmit}>
+    <form className="form" onSubmit={handleSubmit} action="/companies">
       <div className="form-group">
         <label htmlFor="company_name">Company name</label>
         <input name="company_name" id="company_name" type="text" className="form-control" value={inputs.company_name || ""} onChange={handleChange} />

@@ -19,13 +19,13 @@ const LoginForm = props => {
   //   props.parentCallback(true);
   // }
 
-  function onLogin(){
+  function onLogin() {
     Axios
       .get("http://localhost:3001/posts/studentlogin")
       .then((res) => {
         res.data.map((val) => {
-          if(val.mis === values.mis && val.password === values.password && val.email === values.email){
-            localStorage.setItem("mis",values.mis)
+          if (val.mis === values.mis && val.password === values.password && val.email === values.email) {
+            localStorage.setItem("mis", values.mis)
             localStorage.setItem("password", values.password)
             localStorage.setItem("email", values.email)
           }
@@ -64,7 +64,7 @@ const LoginForm = props => {
                   <input
                     autoComplete="off"
                     className={`input ${errors.mis && "is-danger"}`}
-                    type = "email"
+                    type="email"
                     name="mis"
                     onChange={handleChange}
                     value={values.mis || ""}
@@ -93,17 +93,17 @@ const LoginForm = props => {
                   <p className="help is-danger">{errors.password}</p>
                 )}
               </div>
-              <Link to={{pathname:"/home"}}>
-              <button
-                type="submit"
-                className="button is-block is-info is-fullwidth"
-                onClick = {() => {
-                  onLogin();
-                }}
-              >
-                Login
-                
-              </button>
+              <Link to={{ pathname: "/home" }}>
+                <button
+                  type="submit"
+                  className="button is-block is-info is-fullwidth"
+                  onClick={() => {
+                    onLogin();
+                  }}
+                >
+                  Login
+
+                </button>
               </Link>
             </form>
           </div>

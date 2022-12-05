@@ -70,61 +70,69 @@ const AddExperience = () => {
     }
     return (<Main>
         <h1>Tell Us about your experience</h1>
+        {/* {console.log("Mis is ", localStorage.getItem("mis"))} */}
+        <div style={(localStorage.getItem("mis") >= 112100000 ? {} : { display: "none" })}>
+            <br />
+            <h5>Available only if you appeared for an Interview</h5>
+            <br />
+        </div>
         <form className="form" onSubmit={handleSubmit} action="/add-interview-questions">
-            <div className="form-group">
-                <label htmlFor="company_name">Company Name</label>
-                <Select
-                    className="drop-down"
-                    options={company_lst}
-                    name="company_name"
-                    // value={inputs.company_name || ""}
-                    onChange={opt => Select.value = opt.value}
-                // onChange={opt => console.log(opt.value)}
-                // onChange={handleCompanyChange}
-                // onChange="opt => Select.value = opt.value; this.handleChange(); console.log('Was here')"
-                />
-            </div>
-            <br />
-            <div className="form-group">
-                <label htmlFor="interview_rating">Company rating</label>
-                {/* <div class="rating"> */}
-                <div>
-                    <input type="radio" name="interview_rating" id="1" value="1" onChange={handleChange}></input>
-                    <label htmlFor="1">1</label>
-                    <input type="radio" name="interview_rating" id="2" value="2" onChange={handleChange}></input>
-                    <label htmlFor="2">2</label>
-                    <input type="radio" name="interview_rating" id="3" value="3" onChange={handleChange}></input>
-                    <label htmlFor="3">3</label>
-                    <input type="radio" name="interview_rating" id="4" value="4" onChange={handleChange}></input>
-                    <label htmlFor="4">4</label>
-                    <input type="radio" name="interview_rating" id="5" value="5" onChange={handleChange}></input>
-                    <label htmlFor="5">5</label>
+            <fieldset {...(localStorage.getItem("mis") >= 112100000 ? { disabled: 'disabled' } : {})}>
+                <div className="form-group">
+                    <label htmlFor="company_name">Company Name</label>
+                    <Select
+                        className="drop-down"
+                        options={company_lst}
+                        name="company_name"
+                        // value={inputs.company_name || ""}
+                        onChange={opt => Select.value = opt.value}
+                    // onChange={opt => console.log(opt.value)}
+                    // onChange={handleCompanyChange}
+                    // onChange="opt => Select.value = opt.value; this.handleChange(); console.log('Was here')"
+                    />
                 </div>
-            </div>
-            <br />
-
-            <div className="form-group">
-                <label htmlFor="overall_experience">Overall Experience </label>
-                <input name="overall_experience" id="overall_experience" type="text" className="form-control" value={inputs.overall_experience || ""} onChange={handleChange} />
-            </div>
-            <br />
-
-            <div className="form-group">
-                <label htmlFor="verdict">Verdict</label>
                 <br />
-                <div>
-
-                    <input type="radio" name="verdict" value="Selected" id="selected" onChange={handleChange} />
-                    <label htmlFor="selected">Selected</label>
-                    <input type="radio" name="verdict" value="Not Selected" id="not_selected" onChange={handleChange} />
-                    <label htmlFor="not_selected">Not Selected</label>
+                <div className="form-group">
+                    <label htmlFor="interview_rating">Company rating</label>
+                    {/* <div class="rating"> */}
+                    <div>
+                        <input type="radio" name="interview_rating" id="1" value="1" onChange={handleChange}></input>
+                        <label htmlFor="1">1</label>
+                        <input type="radio" name="interview_rating" id="2" value="2" onChange={handleChange}></input>
+                        <label htmlFor="2">2</label>
+                        <input type="radio" name="interview_rating" id="3" value="3" onChange={handleChange}></input>
+                        <label htmlFor="3">3</label>
+                        <input type="radio" name="interview_rating" id="4" value="4" onChange={handleChange}></input>
+                        <label htmlFor="4">4</label>
+                        <input type="radio" name="interview_rating" id="5" value="5" onChange={handleChange}></input>
+                        <label htmlFor="5">5</label>
+                    </div>
                 </div>
-            </div>
-            <div>
                 <br />
-            </div>
-            <button className="button">Submit</button>
-            {/* <button className="button"  onClick={navigateToQuestions}>Submit</button> */}
+
+                <div className="form-group">
+                    <label htmlFor="overall_experience">Overall Experience </label>
+                    <input name="overall_experience" id="overall_experience" type="text" className="form-control" value={inputs.overall_experience || ""} onChange={handleChange} />
+                </div>
+                <br />
+
+                <div className="form-group">
+                    <label htmlFor="verdict">Verdict</label>
+                    <br />
+                    <div>
+
+                        <input type="radio" name="verdict" value="Selected" id="selected" onChange={handleChange} />
+                        <label htmlFor="selected">Selected</label>
+                        <input type="radio" name="verdict" value="Not Selected" id="not_selected" onChange={handleChange} />
+                        <label htmlFor="not_selected">Not Selected</label>
+                    </div>
+                </div>
+                <div>
+                    <br />
+                </div>
+                <button className="button">Submit</button>
+                {/* <button className="button"  onClick={navigateToQuestions}>Submit</button> */}
+            </fieldset>
         </form>
     </Main>)
 };

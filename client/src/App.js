@@ -38,24 +38,9 @@ function App () {
   if(!mis){
     routes = (
       <Switch>
-        <Route exact path="/" component={Index} />
-        <Route path="/login" component={login} />
-        <Route path="/core" component = {coreQ} />
-        <Route path="/about" component={About} />
-        <Route path="/experience" component={Projects} />
-        <Route path="/seedoubt" component={Doubts} />
-        <Route path="/contact" component={Contact} />
-        <Route path="/add-company" component={AddCompany} />
-        <Route path="/add-experience" component={AddExperience} />
-        <Route path="/addque" component={AddQue} />
-        <Route path="/addans/:id" component={AddAns} />
-        <Route path="/seeans/:id" component={SeeAns} />
-        <Route path="/companies" component={companies} />
-        <Route path="/add-interview-questions" component={addInterviewQuestions} />
-        <Route path="/studentInfo" component={Student} />
-        <Route path ="/dsa" component = {dsaQ} />
-        <Route path = "/hr" component={hrQ} />
-        <Redirect to = "/" />
+        <Route exact path="/login" component={login} />
+        <Route path="/" component={Index} />
+        <Redirect to = "/login" />
         {/* <Route component={NotFound} status={404} /> */}
       </Switch>
     )

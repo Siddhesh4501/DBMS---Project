@@ -47,6 +47,9 @@ and other students could answer to it.
     https://github.dev/Siddhesh4501/DBMS---Project
     ```
     * At the project root run : 
+    ```sh
+    npm i
+    ```
     ```sh 
     npm start
     ```
